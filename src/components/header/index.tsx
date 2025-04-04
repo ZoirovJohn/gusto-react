@@ -35,7 +35,7 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                           title="Shopping Cart"
                           link="/shopping-cart"
                         />
-                        <NavButton title="My Profile" link="/dashboard" />
+                        <NavButton title="My Profile" link="/myprofile" />
                         <NavButton title="Contact Us" link="/contact" />
                       </ul>
                     </div>

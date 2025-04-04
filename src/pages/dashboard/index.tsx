@@ -14,7 +14,6 @@ function Dashboard({ children }: { children?: React.ReactElement }) {
         <Breadcrumbs title="User Dashboard" address="User Dashboard" />
         <Layout children={children} />
         <Faq />
-        <AppPart />
       </main>
       <Footer />
     </div>

@@ -1945,6 +1945,7 @@ p {
 .banner .banner-taiteL h1 span {
   background: -webkit-linear-gradient(#f01543 -1.58%, #fe724c 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .banner .banner-taiteL-btn {
