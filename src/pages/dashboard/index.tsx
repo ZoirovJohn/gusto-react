@@ -1,6 +1,4 @@
 import Header from "../../components/header";
-import Faq from "../../components/faq";
-import AppPart from "../../components/app-part";
 import Footer from "../../components/footer";
 import logo from "../../assets/images/logo/footer-logo.svg";
 import Breadcrumbs from "../../components/breadcrumbs";
@@ -11,9 +9,8 @@ function Dashboard({ children }: { children?: React.ReactElement }) {
     <div>
       <Header className="header-two  header-three" logo={logo} />
       <main>
-        <Breadcrumbs title="User Dashboard" address="User Dashboard" />
+        <Breadcrumbs title="My Profile" address="My Profile" />
         <Layout children={children} />
-        <Faq />
       </main>
       <Footer />
     </div>

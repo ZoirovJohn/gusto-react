@@ -5,6 +5,7 @@ import FeaturedFood from "../components/featuredFood";
 import Testimonials from "../components/testimonials";
 import Blogs from "../components/blog";
 import Footer from "../components/footer";
+import Map from "../components/contact/map";
 
 function HomeTwo() {
   return (
@@ -16,6 +17,7 @@ function HomeTwo() {
         <FeaturedFood />
         <Testimonials />
         <Blogs />
+        <Map />
       </main>
       <Footer />
     </div>

@@ -39,7 +39,7 @@ function Offcanvas({
             <Link to="/about">About Us</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/help">Help</Link>
           </li>
           <li className="dropdown">
             <Link to="#">Blog</Link>

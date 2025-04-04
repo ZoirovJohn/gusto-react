@@ -61,19 +61,19 @@ function Footer() {
                     <div className="quick-line-menu">
                       <ul>
                         <li>
-                          <Link to="/dashboard">My Account</Link>
+                          <Link to="/myprofile">My Account</Link>
                         </li>
                         <li>
                           <Link to="/about">About Us</Link>
                         </li>
                         <li>
-                          <Link to="/contact">Store Locator</Link>
+                          <Link to="/help">Store Locator</Link>
                         </li>
                         <li>
-                          <Link to="/contact">Delivery</Link>
+                          <Link to="/help">Delivery</Link>
                         </li>
                         <li>
-                          <Link to="/contact">Pickup</Link>
+                          <Link to="/help">Pickup</Link>
                         </li>
                       </ul>
                     </div>
@@ -109,48 +109,6 @@ function Footer() {
                   data-aos="fade-right"
                   data-aos-delay="300"
                 >
-                  <div className="quick-line-item">
-                    <div className="quick-line-item-head">
-                      <h3>Subscribe our Newsletter</h3>
-                    </div>
-
-                    <div className="quick-line-btn">
-                      <div className="icon">
-                        <img src={smsIcon} alt="icon" />
-                      </div>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="exampleFormControlInput6"
-                        placeholder="Your email"
-                      />
-                      <Link to="#" className="main-btn-four">
-                        Subscribe
-                      </Link>
-                    </div>
-
-                    <div className="quick-line-btn-text">
-                      <h6>We accept Payment methods:</h6>
-                    </div>
-
-                    <div className="quick-line-btn-img">
-                      <a href="#">
-                        <img src={visaIcon} alt="img" />
-                      </a>
-                      <a href="#">
-                        <img src={amexIcon} alt="img" />
-                      </a>
-                      <a href="#">
-                        <img src={paypalIcon} alt="img" />
-                      </a>
-                      <a href="#">
-                        <img src={mastercardIcon} alt="img" />
-                      </a>
-                      <a href="#">
-                        <img src={googlePayIcon} alt="img" />
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

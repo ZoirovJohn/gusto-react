@@ -3,7 +3,7 @@ import HomeTwo from "./pages/home-two";
 import AllFood from "./pages/all-food/all-food";
 import List from "./pages/all-food/list";
 import Grid from "./pages/all-food/grid";
-import Contact from "./pages/contact";
+import Help from "./pages/help";
 import Dashboard from "./pages/dashboard";
 import EditProfile from "./pages/dashboard/edit-profile";
 import Address from "./pages/dashboard/address";
@@ -36,8 +36,8 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/contact",
-    element: <Contact />,
+    path: "/help",
+    element: <Help />,
   },
 
   {

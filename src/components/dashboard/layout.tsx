@@ -17,7 +17,7 @@ function Layout({ children }: { children: React.ReactNode }) {
                 aria-labelledby="v-pills-home-tab"
               >
                 <div className="dashboard-item-taitel">
-                  <h4>Dashboard</h4>
+                  <h4>MyProfile</h4>
                   <p>Let’s check your today</p>
                 </div>
                 {children}
