@@ -246,7 +246,6 @@ p {
 
 .header {
   position: fixed;
-  padding: 10px 0;
   width: 100%;
   z-index: 999;
   background: linear-gradient(90deg, #f01543 -1.58%, #fe724c 100%);
@@ -317,8 +316,7 @@ p {
   position: fixed;
   width: 100%;
   z-index: 999;
-  margin-top: 10px;
-  padding: 22px 0;
+  padding: 55px 0 10px 0;
   background-color: #fff;
 }
 .header .menu-bg .nav-main {
@@ -328,16 +326,18 @@ p {
 .header .menu-bg .nav-main .nav-main {
   display: flex;
   align-items: center;
-  gap: 64px;
-  padding-right: 69px;
+  gap: 0px;
+  padding-right: 6px;
 }
 .header .menu-bg .nav-main .nav-main .menu ul {
   display: flex;
   align-items: center;
   gap: 28px;
+  padding-left: 10px;
 }
 .header .menu-bg .nav-main .nav-main .menu ul li {
   position: relative;
+  padding-left: 5px;
 }
 .header .menu-bg .nav-main .nav-main .menu ul li:hover ul {
   opacity: 1;
@@ -353,6 +353,7 @@ p {
   line-height: 150%;
   display: flex;
   gap: 5px;
+  padding-left: 5px;
   align-items: center;
   text-transform: capitalize;
 }
