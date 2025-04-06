@@ -2,7 +2,19 @@ import Slider from "../slider";
 import { foods } from "../../../lib/data/food";
 import FoodCard from "../cards/foodCard";
 
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveNewDishes } from "../../pages/home/selector";
+
+const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
+  newDishes,
+}));
+
 function FeaturedFood() {
+  const { newDishes } = useSelector(newDishesRetriever);
+
+  console.log("newDishes:", newDishes);
+
   return (
     <section className="featured s-padding">
       <div className="container">
