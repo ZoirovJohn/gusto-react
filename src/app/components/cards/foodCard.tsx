@@ -1,24 +1,29 @@
-import { food } from "../../../lib/data/food";
 import { Link } from "react-router-dom";
+import { Product } from "../../../lib/types/product";
+import { serverApi } from "../../../lib/config";
 
-function FoodCard({ food, className }: { food: food; className?: string }) {
-  const { title, img, items, reviews, price, offer, tags } = food;
+function FoodCard({
+  product,
+  className,
+}: {
+  product: Product;
+  className?: string;
+}) {
+  const { productName, productImages, productViews, productPrice } =
+    product;
+  const items = ["4 Piece Chicken", "Spicy Sauce"];
+  const offer = "20% Off";
+  const imagePath = `${serverApi}/${productImages[0]}`;
   return (
     <div
       className={` shaf-item res-mb-20px ${className ? className : ""}  `}
       data-groups='["all", "science", "development", "architecture","engineering", "Vegetarian" ]'
     >
       <div className="featured-item  " data-aos="fade-up">
-        {tags ? (
-          <div className="featured-item-img-populer w-full">
-            <img src={tags} alt="img" />
-          </div>
-        ) : (
-          ""
-        )}
+         
 
         <div className="featured-item-img">
-          <img src={img} className="w-100" alt="featured-thumb" />
+          <img src={imagePath} className="w-100" alt="featured-thumb" />
 
           <div className="featured-item-img-overlay">
             <div className="featured-item-img-over-text">
@@ -53,7 +58,7 @@ function FoodCard({ food, className }: { food: food; className?: string }) {
         <div className="featured-item-text">
           <div className="text-item">
             <div className="left">
-              <h3>${price}</h3>
+              <h3>${productPrice}</h3>
             </div>
             <div className="right">
               <div className="icon">
@@ -72,13 +77,13 @@ function FoodCard({ food, className }: { food: food; className?: string }) {
                   </svg>
                 </span>
               </div>
-              <h5> {reviews}</h5>
+              <h5> {productViews}</h5>
             </div>
           </div>
 
           <div className="text-item-center">
             <h3>
-              <Link to="/all-food">{title}</Link>
+              <Link to="/all-food">{productName}</Link>
             </h3>
           </div>
 
