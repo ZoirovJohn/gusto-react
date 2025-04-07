@@ -11,14 +11,6 @@ function CategoriesV2() {
               <h2>Our Categories</h2>
             </div>
           </div>
-
-          <div className="col-lg-6">
-            <div className="categories-head-btn">
-              <Link to="/all-food" className="main-btn">
-                See more
-              </Link>
-            </div>
-          </div>
         </div>
 
         <div className="row">

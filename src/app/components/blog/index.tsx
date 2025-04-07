@@ -14,13 +14,6 @@ function Blogs() {
               <h2>Our Latest news</h2>
             </div>
           </div>
-          <div className="col-lg-6">
-            <div className="news-taitel-btn">
-              <a href="#" className="main-btn-four">
-                Browser All
-              </a>
-            </div>
-          </div>
         </div>
         <Slider
           spaceBetween={30}

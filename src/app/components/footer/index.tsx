@@ -24,16 +24,16 @@ function Footer() {
 
               <div className="footer-icon">
                 <div className="icon">
-                  <a href="https://www.facebook.com/" target="_blank">
+                  <a target="_blank">
                     <i className="fa-brands fa-facebook-f"></i>
                   </a>
-                  <a href="https://twitter.com/" target="_blank">
+                  <a target="_blank">
                     <i className="fa-brands fa-twitter"></i>
                   </a>
-                  <a href="https://www.instagram.com/" target="_blank">
+                  <a target="_blank">
                     <i className="fa-brands fa-instagram"></i>
                   </a>
-                  <a href="https://www.youtube.com/" target="_blank">
+                  <a target="_blank">
                     <i className="fa-brands fa-youtube"></i>
                   </a>
                 </div>
@@ -55,19 +55,19 @@ function Footer() {
                     <div className="quick-line-menu">
                       <ul>
                         <li>
-                          <Link to="/myprofile">My Account</Link>
+                          <Link to="/">Home</Link>
                         </li>
                         <li>
-                          <Link to="/about">About Us</Link>
+                          <Link to="/all-food">Menu</Link>
                         </li>
                         <li>
-                          <Link to="/help">Store Locator</Link>
+                          <Link to="/shopping-cart">Shopping cart</Link>
                         </li>
                         <li>
-                          <Link to="/help">Delivery</Link>
+                          <Link to="/myprofile">My profile</Link>
                         </li>
                         <li>
-                          <Link to="/help">Pickup</Link>
+                          <Link to="/help">Help</Link>
                         </li>
                       </ul>
                     </div>
@@ -86,13 +86,13 @@ function Footer() {
                     <div className="quick-line-menu">
                       <ul>
                         <li>
-                          <Link to="/trust-safety">Trust & Safety</Link>
+                          <Link to="">Trust & Safety</Link>
                         </li>
                         <li>
-                          <Link to="/terms-service">Terms of Service</Link>
+                          <Link to="">Terms of Service</Link>
                         </li>
                         <li>
-                          <Link to="/privacy-policy">Privacy Policy</Link>
+                          <Link to="">Privacy Policy</Link>
                         </li>
                       </ul>
                     </div>
@@ -103,6 +103,27 @@ function Footer() {
                   data-aos="fade-right"
                   data-aos-delay="300"
                 >
+                  <div className="quick-line-item">
+                    <div className="quick-line-item-head">
+                      <h3>Title: Contact Us</h3>
+                    </div>
+
+                    <div className="quick-line-menu">
+                      <ul>
+                        <li>
+                          <Link to="">📧 Email: support@gusto.com</Link>
+                        </li>
+                        <li>
+                          <Link to="">📞 Phone: +1 (234) 567-890</Link>
+                        </li>
+                        <li>
+                          <Link to="">
+                            📍 Location: 60 Via del Poggio, 05015 Fabro, Italy
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
