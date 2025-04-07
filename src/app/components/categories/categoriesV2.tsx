@@ -36,6 +36,7 @@ function CategoriesV2() {
               }
               title="Delish Burger"
               items={25}
+              path="/all-food/list"
             />
 
             <CategoriesCardV2
@@ -62,6 +63,7 @@ function CategoriesV2() {
               }
               title="Sandwiches"
               items={25}
+              path="/all-food/list"
             />
             <CategoriesCardV2
               icon={
@@ -94,6 +96,7 @@ function CategoriesV2() {
               }
               title="Pizzas"
               items={7}
+              path="/all-food/list"
             />
             <CategoriesCardV2
               icon={
@@ -114,6 +117,7 @@ function CategoriesV2() {
               }
               title="Mexcan Cuisine"
               items={25}
+              path="/all-food/list"
             />
             <CategoriesCardV2
               icon={
@@ -131,6 +135,7 @@ function CategoriesV2() {
               }
               title="Italian Cuisine"
               items={25}
+              path="/all-food/list"
             />
           </div>
         </div>
