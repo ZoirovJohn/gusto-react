@@ -1,5 +1,4 @@
 import Slider from "../slider";
-import { foods } from "../../../lib/data/food";
 import FoodCard from "../cards/foodCard";
 
 import { useSelector } from "react-redux";
