@@ -1452,7 +1452,12 @@
   }
 
   .food-details .food-details-btn-box-item {
-    display: block;
+    display: flex;
+    justify-content: center;
+  }
+  /* <div className="food-details-btn-item"> */
+  .food-details .food-details-btn-box-item ul {
+    width: 600px;
   }
 
   .food-details .food-details-btn-search-box {
