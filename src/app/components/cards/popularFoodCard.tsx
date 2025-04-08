@@ -1,13 +1,16 @@
-import { popularFood } from "../../../lib/data/food";
 import { Link } from "react-router-dom";
+import { Product } from "../../../lib/types/product";
+import { serverApi } from "../../../lib/config";
 
-function PopularFoodCard({ food }: { food: popularFood }) {
-  const { title, img, items, reviews, price } = food;
+function PopularFoodCard({ product }: { product: Product }) {
+  const { productName, productImages, productViews, productPrice } = product;
+  const items = ["4 Piece Chicken", "Spicy Sauce"];
+  const imagePath = `${serverApi}/${productImages[0]}`;
   return (
     <div className="col-lg-6 popular-item-mt-30px" data-aos="fade-up">
       <div className="popular-item-box">
         <div className="popular-item-box-img">
-          <img src={img} alt="thumb" />
+          <img src={imagePath} alt="thumb" />
 
           <div className="popular-item-box-img-overlay">
             <div className="icon">
@@ -28,14 +31,14 @@ function PopularFoodCard({ food }: { food: popularFood }) {
             </div>
 
             <div className="text">
-              <p>{reviews}</p>
+              <p>{productViews}</p>
             </div>
           </div>
         </div>
 
         <div className="popular-inner-box">
           <div className="popular-item-box-text">
-            <h3>{title}</h3>
+            <h3>{productName}</h3>
           </div>
           {items?.map((item) => (
             <div className="popular-inner-item" key={item}>
@@ -69,7 +72,7 @@ function PopularFoodCard({ food }: { food: popularFood }) {
 
           <div className="popular-inner-item-btm">
             <div className="text">
-              <h3>${price}</h3>
+              <h3>${productPrice}</h3>
             </div>
 
             <div className="popular-inner-item-btn">

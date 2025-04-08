@@ -1,7 +1,12 @@
-import { listFoods } from "../../../lib/data/foodView";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 import PopularFoodCard from "../../components/cards/popularFoodCard";
+import { retrieveProducts } from "./selector";
 
 function List() {
+  const products = useSelector(retrieveProducts);
+  const [loading, setLoading] = useState(false);
+
   return (
     <div
       className="tab-pane fade active show"
@@ -10,9 +15,15 @@ function List() {
       aria-labelledby="pills-contact-tab"
     >
       <div className="row popular-item-box-mt">
-        {listFoods?.map((food) => (
-          <PopularFoodCard key={food.id} food={food} />
-        ))}
+        {loading ? (
+          <div className="col-12 text-center">Loading products...</div>
+        ) : products && products.length > 0 ? (
+          products.map((product) => (
+            <PopularFoodCard key={product._id} product={product} />
+          ))
+        ) : (
+          <div className="col-12 text-center">No products found</div>
+        )}
       </div>
     </div>
   );
