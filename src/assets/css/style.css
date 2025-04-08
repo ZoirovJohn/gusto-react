@@ -9292,3 +9292,18 @@ p {
 .slider-thumb .swiper-slide-active .overlay {
   min-width: 100% !important;
 }
+
+/* NO DATA FOUND */
+
+.no-products-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 300px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f8f9fa; /* Optional: light background */
+  border-radius: 8px; /* Optional: rounded corners */
+}

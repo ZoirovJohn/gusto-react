@@ -22,7 +22,7 @@ function Grid() {
             />
           ))
         ) : (
-          <div className="col-12 text-center">No products found</div>
+          <div className="no-products-message">No products found</div>
         )}
       </div>
     </div>
