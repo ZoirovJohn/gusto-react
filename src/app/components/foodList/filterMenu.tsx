@@ -44,89 +44,8 @@ function FilterMenu() {
     "Junk Food",
   ];
 
-  // Custom CSS to be added to your global styles
-  const styles = `
-    .filter-container {
-      display: flex;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid #e5e7eb;
-      background-color: white;
-      margin-bottom: 1.5rem;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .category-section {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-    
-    .category-item {
-      padding: 0.625rem 1.25rem;
-      border-radius: 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      color: #4B5563;
-      transition: all 0.2s ease;
-      display: inline-block;
-      font-weight: 500;
-    }
-    
-    .category-item.active {
-      background-color: #EF4444;
-      color: white;
-      font-weight: bold;
-    }
-    
-    .category-item:hover:not(.active) {
-      background-color: #F3F4F6;
-    }
-    
-    .search-section {
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 250px;
-      margin-left: 1rem;
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      padding-right: 3rem;
-      border-radius: 0.5rem;
-      border: 1px solid #e5e7eb;
-      background-color: #f9fafb;
-    }
-    
-    .search-button {
-      position: absolute;
-      right: 8px;
-      background-color: #EF4444;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-    }
-    
-    .search-button svg {
-      width: 20px;
-      height: 20px;
-    }
-  `;
-
   return (
     <div className="row">
-      <style>{styles}</style>
       <div className="col-lg-12">
         <div className="filter-container">
           {/* Centered Category Buttons */}
