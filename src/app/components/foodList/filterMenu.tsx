@@ -46,14 +46,18 @@ function FilterMenu() {
       searchCollectionHandler(ProductCollection.MEXICANCUISINE);
     else if (category === "Italian")
       searchCollectionHandler(ProductCollection.ITALIANCUISINE);
-    else if (category === "Junk Food")
-      searchCollectionHandler(ProductCollection.JUNKFOOD);
+    else if (category === "Burger")
+      searchCollectionHandler(ProductCollection.BURGER);
+    else if (category === "Sandwich")
+      searchCollectionHandler(ProductCollection.SANDWICH);
+    else if (category === "Pizza")
+      searchCollectionHandler(ProductCollection.PIZZA);
     else if (category === "Salad")
       searchCollectionHandler(ProductCollection.SALAD);
+    else if (category === "Desert")
+      searchCollectionHandler(ProductCollection.DESSERT);
     else if (category === "Drink")
       searchCollectionHandler(ProductCollection.DRINK);
-    else if (category === "Other")
-      searchCollectionHandler(ProductCollection.OTHER);
   };
 
   const searchCollectionHandler = (collection: ProductCollection) => {
@@ -71,10 +75,12 @@ function FilterMenu() {
     "All Category",
     "Mexican",
     "Italian",
-    "Junk Food",
+    "Burger",
+    "Sandwich",
+    "Pizza",
     "Salad",
+    "Desert",
     "Drink",
-    "Other",
   ];
 
   return (
