@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <Grid />,
       },
       {
-        path: "list",
+        path: ":component",
         element: <Grid />,
       },
     ],

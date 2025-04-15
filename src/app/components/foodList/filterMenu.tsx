@@ -1,30 +1,54 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProductService from "../../services/ProductService";
 import { ProductInquiry } from "../../../lib/types/product";
 import { setProducts } from "../../pages/all-food/slice";
 import { useDispatch } from "react-redux";
 import { ProductCollection } from "../../../lib/enums/product.enum";
+import { useParams } from "react-router-dom";
 
 function FilterMenu() {
   const dispatch = useDispatch();
+  const { component } = useParams();
   const [activeSec, setActiveSec] = useState("Mexican");
+  const [searchText, setSearchText] = useState<string>("");
+
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 6,
     order: "createdAt",
     search: "",
+    productCollection: ProductCollection.MEXICANCUISINE,
   });
-  const [searchText, setSearchText] = useState<string>("");
+
+  const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  const categories = [
+    "Mexican",
+    "Italian",
+    "Burger",
+    "Sandwich",
+    "Pizza",
+    "Salad",
+    "Desert",
+    "Drink",
+  ];
+
+  useEffect(() => {
+    if (component) {
+      setActiveSec(component);
+
+      if (buttonRefs.current[component]) {
+        buttonRefs.current[component]?.click();
+      }
+    }
+  }, [component]);
 
   useEffect(() => {
     const productService = new ProductService();
-    const fetchProducts = async () => {
-      productService
-        .getProducts(productSearch)
-        .then((data) => dispatch(setProducts(data)))
-        .catch((err) => console.log(err));
-    };
-    fetchProducts();
+    productService
+      .getProducts(productSearch)
+      .then((data) => dispatch(setProducts(data)))
+      .catch((err) => console.log(err));
   }, [productSearch]);
 
   useEffect(() => {
@@ -34,7 +58,6 @@ function FilterMenu() {
     }
   }, [searchText]);
 
-  /* HANDLERS */
   const handleActiveSection = (e: React.MouseEvent<HTMLElement>) => {
     setActiveSec((e.target as HTMLElement)?.innerText);
   };
@@ -69,17 +92,6 @@ function FilterMenu() {
     setProductSearch({ ...productSearch });
   };
 
-  const categories = [
-    "Mexican",
-    "Italian",
-    "Burger",
-    "Sandwich",
-    "Pizza",
-    "Salad",
-    "Desert",
-    "Drink",
-  ];
-
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -88,12 +100,13 @@ function FilterMenu() {
             {categories.map((category) => (
               <div
                 key={category}
+                ref={(el) => (buttonRefs.current[category] = el)} // 🔗 store ref
                 className={`category-item ${
                   activeSec === category ? "active" : ""
                 }`}
                 onClick={(e) => {
-                  handleActiveSection(e),
-                    searchCollectionHandlertoHandler(category);
+                  handleActiveSection(e);
+                  searchCollectionHandlertoHandler(category);
                 }}
               >
                 {category}
@@ -112,14 +125,13 @@ function FilterMenu() {
                 if (e.key === "Enter") searchProductHandler();
               }}
             />
-            <button className="search-button">
+            <button className="search-button" onClick={searchProductHandler}>
               <svg
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                onClick={searchProductHandler}
               >
                 <path
                   d="M18.5 18.5L22 22M21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21C16.7467 21 21 16.7467 21 11.5Z"
