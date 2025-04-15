@@ -19,8 +19,25 @@ function FoodCard({
       data-groups='["all", "science", "development", "architecture","engineering", "Vegetarian" ]'
     >
       <div className="featured-item  " data-aos="fade-up">
-        <div className="featured-item-img">
-          <img src={imagePath} className="w-100" alt="featured-thumb" />
+        <div
+          className="featured-item-img"
+          style={{
+            width: "100%",
+            height: "250px",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={imagePath}
+            className="w-100"
+            alt="featured-thumb"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
 
           <div className="featured-item-img-overlay">
             <div className="featured-item-img-over-text">
@@ -80,7 +97,7 @@ function FoodCard({
 
           <div className="text-item-center">
             <h3>
-              <Link to="/all-food">{productName}</Link>
+              <Link to="/all-food">{productName.slice(0, 30)}</Link>
             </h3>
           </div>
 
