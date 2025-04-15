@@ -1,5 +1,4 @@
 import CategoriesCardV2 from "../cards/categoriesCardV2";
-import { Link } from "react-router-dom";
 
 function CategoriesV2() {
   return (

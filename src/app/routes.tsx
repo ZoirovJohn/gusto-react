@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeTwo from "./pages/home/home-two";
 import AllFood from "./pages/all-food/all-food";
-import List from "./pages/all-food/list";
 import Grid from "./pages/all-food/grid";
 import Help from "./pages/help";
 import Dashboard from "./pages/dashboard";
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "list",
-        element: <List />,
+        element: <Grid />,
       },
     ],
   },

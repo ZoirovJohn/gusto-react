@@ -12,6 +12,7 @@ import { setNewDishes } from "./slice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import ProductService from "../../services/ProductService";
+import { ProductCollection } from "../../../lib/enums/product.enum";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -29,7 +30,7 @@ function HomeTwo() {
         page: 1,
         limit: 6,
         order: "updatedAt",
-        // productCollection: ProductCollection.DISH,
+        productCollection: ProductCollection.DRINK,
       })
       .then((data) => setNewDishes(data))
       .catch((err) => console.log(err));

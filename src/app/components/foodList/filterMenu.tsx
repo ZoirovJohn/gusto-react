@@ -7,7 +7,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 
 function FilterMenu() {
   const dispatch = useDispatch();
-  const [activeSec, setActiveSec] = useState("All Category");
+  const [activeSec, setActiveSec] = useState("Mexican");
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 6,
@@ -40,9 +40,7 @@ function FilterMenu() {
   };
 
   const searchCollectionHandlertoHandler = (category: string) => {
-    if (category === "All Category")
-      searchCollectionHandler(ProductCollection.ALL);
-    else if (category === "Mexican")
+    if (category === "Mexican")
       searchCollectionHandler(ProductCollection.MEXICANCUISINE);
     else if (category === "Italian")
       searchCollectionHandler(ProductCollection.ITALIANCUISINE);
@@ -72,7 +70,6 @@ function FilterMenu() {
   };
 
   const categories = [
-    "All Category",
     "Mexican",
     "Italian",
     "Burger",
