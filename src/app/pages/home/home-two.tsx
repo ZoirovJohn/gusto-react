@@ -30,7 +30,7 @@ function HomeTwo() {
         page: 1,
         limit: 6,
         order: "updatedAt",
-        productCollection: ProductCollection.DRINK,
+        productCollection: ProductCollection.ITALIANCUISINE,
       })
       .then((data) => setNewDishes(data))
       .catch((err) => console.log(err));
