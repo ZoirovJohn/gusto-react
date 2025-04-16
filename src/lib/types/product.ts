@@ -9,6 +9,7 @@ export interface Product {
   productStatus: ProductStatus;
   productCollection: ProductCollection;
   productName: string;
+  productIngredient: string;
   productPrice: number;
   productLeftCount: number;
   productSize?: ProductSize;

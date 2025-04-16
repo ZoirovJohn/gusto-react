@@ -9,8 +9,14 @@ function FoodCard({
   product: Product;
   className?: string;
 }) {
-  const { productName, productImages, productViews, productPrice } = product;
-  const items = ["4 Piece Chicken", "Spicy Sauce"];
+  const {
+    productName,
+    productImages,
+    productViews,
+    productPrice,
+    productIngredient,
+  } = product;
+  const items = productIngredient.split(",");
   const offer = "20% Off";
   const imagePath = `${serverApi}/${productImages[0]}`;
   return (
