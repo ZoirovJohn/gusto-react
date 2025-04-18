@@ -325,7 +325,9 @@ select:disabled {
 [type="reset"],
 [type="submit"],
 button {
-  -webkit-appearance: button;
+  -webkit-appearance: button; /* Safari, Chrome */
+  -moz-appearance: button;    /* Firefox */
+  appearance: button;         /* Standard */
 }
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -377,6 +379,8 @@ legend + * {
 [type="search"] {
   outline-offset: -2px;
   -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield; 
 }
 ::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -2080,7 +2084,8 @@ textarea.form-control-lg {
   -moz-appearance: none;
   appearance: none;
   -webkit-print-color-adjust: exact;
-  color-adjust: exact;
+  print-color-adjust: exact;
+
 }
 .form-check-input[type="checkbox"] {
   border-radius: 0.25em;

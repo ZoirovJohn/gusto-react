@@ -13,7 +13,7 @@ function FilterMenu() {
   const currentPage = useSelector(
     (state: RootState) => state.productsPage.currentPage
   ); // Get current page from Redux
-  const [activeSec, setActiveSec] = useState("Mexican");
+  const [activeSec, setActiveSec] = useState("Italian");
   const [searchText, setSearchText] = useState<string>("");
 
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
@@ -21,14 +21,14 @@ function FilterMenu() {
     limit: 6,
     order: "createdAt",
     search: "",
-    productCollection: ProductCollection.MEXICANCUISINE,
+    productCollection: ProductCollection.ITALIANCUISINE,
   });
 
   const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const categories = [
-    "Mexican",
     "Italian",
+    "Mexican",
     "Burger",
     "Sandwich",
     "Pizza",
@@ -74,10 +74,10 @@ function FilterMenu() {
   };
 
   const searchCollectionHandlertoHandler = (category: string) => {
-    if (category === "Mexican")
-      searchCollectionHandler(ProductCollection.MEXICANCUISINE);
-    else if (category === "Italian")
+    if (category === "Italian")
       searchCollectionHandler(ProductCollection.ITALIANCUISINE);
+    else if (category === "Mexican")
+      searchCollectionHandler(ProductCollection.MEXICANCUISINE);
     else if (category === "Burger")
       searchCollectionHandler(ProductCollection.BURGER);
     else if (category === "Sandwich")

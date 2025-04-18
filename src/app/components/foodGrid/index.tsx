@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { food, foods } from "../../../lib/data/food";
 
 function FoodGrid() {
-  const [foodsArr, setFoodsArr] = useState(foods);
+  const [, setFoodsArr] = useState(foods);
   const [activeSec, setActiveSec] = useState("All Category");
   const shuffle = (array: food[]) => {
     return array.sort(() => Math.random() - 0.5);

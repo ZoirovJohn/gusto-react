@@ -22,7 +22,6 @@ function Pagination() {
           <ul>
             <li>
               <a
-                href="#"
                 onClick={() => handlePageChange(currentPage - 1)} // Go to previous page
                 className="active"
               >
@@ -48,7 +47,6 @@ function Pagination() {
             </li>
             <li>
               <a
-                href="#"
                 onClick={() => handlePageChange(currentPage + 1)} // Go to next page
                 className="active"
               >

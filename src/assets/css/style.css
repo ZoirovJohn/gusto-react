@@ -321,35 +321,37 @@ p {
 }
 .header .menu-bg .nav-main {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-}
-.header .menu-bg .nav-main .nav-main {
-  display: flex;
-  align-items: center;
+  width: 100%;
   gap: 0px;
-  padding-right: 6px;
+  padding: 0px;
 }
-.header .menu-bg .nav-main .nav-main .menu ul {
+.header .menu-bg .nav-main .menu{
+  width: 90%;
+}
+.header .menu-bg .nav-main .menu ul {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 28px;
-  padding-left: 10px;
+  /* padding-left: 60px; */
 }
-.header .menu-bg .nav-main .nav-main .menu ul li {
+.header .menu-bg .nav-main .menu ul li {
   position: relative;
-  padding-left: 5px;
 }
-.header .menu-bg .nav-main .nav-main .menu ul li:hover ul {
+.header .menu-bg .nav-main .menu ul li:hover ul {
   opacity: 1;
   visibility: visible;
   transform: scaleY(1);
 }
-.header .menu-bg .nav-main .nav-main .menu ul li a {
+.header .menu-bg .nav-main .menu ul li a {
   position: relative;
   transition: all linear 0.3s;
   color: var(--heading-color);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 150%;
   display: flex;
   gap: 5px;
@@ -357,7 +359,7 @@ p {
   align-items: center;
   text-transform: capitalize;
 }
-.header .menu-bg .nav-main .nav-main .menu ul li a::after {
+.header .menu-bg .nav-main .menu ul li a::after {
   position: absolute;
   content: "";
   bottom: 0;
@@ -367,13 +369,13 @@ p {
   background-color: var(--primary-color);
   transition: all linear 0.3s;
 }
-.header .menu-bg .nav-main .nav-main .menu ul li a:hover {
+.header .menu-bg .nav-main .menu ul li a:hover {
   color: var(--primary-color);
 }
-.header .menu-bg .nav-main .nav-main .menu ul li a:hover::after {
+.header .menu-bg .nav-main .menu ul li a:hover::after {
   width: 100%;
 }
-.header .menu-bg .nav-main .nav-main .menu ul ul {
+.header .menu-bg .nav-main .menu ul ul {
   position: absolute;
   display: list-item;
   width: 200px;
@@ -388,15 +390,16 @@ p {
   visibility: visible;
   transform: scaleY(0);
 }
-.header .menu-bg .nav-main .nav-main .menu ul ul li {
+.header .menu-bg .nav-main .menu ul ul li {
   padding-bottom: 10px;
 }
-.header .menu-bg .nav-main .nav-main .menu ul ul li:last-child {
+.header .menu-bg .nav-main .menu ul ul li:last-child {
   padding-bottom: 0;
 }
 .header .menu-bg .nav-btn-main {
   display: flex;
   align-items: center;
+  width: 5%;
   gap: 24px;
 }
 .header .menu-bg .nav-btn-main .nav-btn-one {
@@ -1082,7 +1085,9 @@ p {
 }
 .header .menu-bg .nav-login-btn-main {
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 10%;
   gap: 20px;
 }
 .header .menu-bg .nav-login-btn-main .main-btn-four {
@@ -1612,7 +1617,7 @@ p {
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
   color: #fff;
-  padding: 13px 32px;
+  padding: 13px 22px;
   transition: all 0.5s linear;
   overflow: hidden;
   z-index: 1;
@@ -5188,7 +5193,7 @@ p {
   color: var(--heading-color);
 }
 .food-details-section .food-details-slick {
-  margin-top: 80px;
+  margin-top: 10px;
 }
 .food-details-section .food-details-slick .slider-for-img {
   width: 100%;
@@ -8990,7 +8995,7 @@ p {
 }
 
 .footer {
-  padding: 110px 0;
+  padding: 50px 0;
   background: url(../images/banner/Footers-bg.png) no-repeat center/cover;
 }
 .footer .footer-text {

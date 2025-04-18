@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
+import { useNavigate  } from "react-router-dom";
 
 function FoodCard({
   product,
@@ -16,9 +17,16 @@ function FoodCard({
     productPrice,
     productIngredient,
   } = product;
-  const items = productIngredient.split(",");
+  const ingredients = productIngredient.split(",");
   const offer = "20% Off";
   const imagePath = `${serverApi}/${productImages[0]}`;
+  
+  const navigate = useNavigate ();
+
+  const chooseDishHandler = (id: string) => {
+    navigate(`/food-details/${id}`);
+  };
+
   return (
     <div
       className={` shaf-item res-mb-20px ${className ? className : ""}  `}
@@ -32,6 +40,7 @@ function FoodCard({
             height: "250px",
             overflow: "hidden",
           }}
+          onClick={() => chooseDishHandler(product._id)}
         >
           <img
             src={imagePath}
@@ -108,7 +117,7 @@ function FoodCard({
           </div>
 
           <div className="text-item-center-item-box">
-            {items?.map((item) => (
+            {ingredients?.map((item) => (
               <div className="text-item-center-item" key={item}>
                 <div className="icon">
                   <span>

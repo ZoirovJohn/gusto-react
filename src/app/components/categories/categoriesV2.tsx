@@ -94,7 +94,7 @@ function CategoriesV2() {
                 </svg>
               }
               title="Pizzas"
-              items={7}
+              items={25}
               path="/all-food/Pizza"
             />
             <CategoriesCardV2
