@@ -2,18 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import ProductService from "../../services/ProductService";
 import { ProductInquiry } from "../../../lib/types/product";
 import { setProducts } from "../../pages/all-food/slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { useParams } from "react-router-dom";
+import { RootState } from "../../store"; // Adjust the path if needed
 
 function FilterMenu() {
   const dispatch = useDispatch();
   const { component } = useParams();
+  const currentPage = useSelector(
+    (state: RootState) => state.productsPage.currentPage
+  ); // Get current page from Redux
   const [activeSec, setActiveSec] = useState("Mexican");
   const [searchText, setSearchText] = useState<string>("");
 
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
-    page: 1,
+    page: currentPage, // Use currentPage from Redux
     limit: 6,
     order: "createdAt",
     search: "",
@@ -36,7 +40,6 @@ function FilterMenu() {
   useEffect(() => {
     if (component) {
       setActiveSec(component);
-
       if (buttonRefs.current[component]) {
         buttonRefs.current[component]?.click();
       }
@@ -57,6 +60,14 @@ function FilterMenu() {
       setProductSearch({ ...productSearch });
     }
   }, [searchText]);
+
+  useEffect(() => {
+    // Update productSearch page when currentPage changes
+    setProductSearch((prevSearch) => ({
+      ...prevSearch,
+      page: currentPage,
+    }));
+  }, [currentPage]);
 
   const handleActiveSection = (e: React.MouseEvent<HTMLElement>) => {
     setActiveSec((e.target as HTMLElement)?.innerText);
@@ -82,7 +93,7 @@ function FilterMenu() {
   };
 
   const searchCollectionHandler = (collection: ProductCollection) => {
-    productSearch.page = 1;
+    productSearch.page = 1; // Reset to page 1 when changing category
     productSearch.productCollection = collection;
     setProductSearch({ ...productSearch });
   };

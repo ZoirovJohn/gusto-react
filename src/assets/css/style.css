@@ -247,7 +247,7 @@ p {
 .header {
   position: fixed;
   width: 100%;
-  z-index: 999;
+  z-index: 909;
   background: linear-gradient(90deg, #f01543 -1.58%, #fe724c 100%);
 }
 .header .nav-bg {
@@ -5894,7 +5894,7 @@ p {
 }
 
 .inner-banner {
-  padding: 270px 0 128px 0;
+  padding: 170px 0 60px 0;
   background: url(../images/banner/inner-bg.png) no-repeat center/cover;
 }
 .inner-banner .inner-banner-head {

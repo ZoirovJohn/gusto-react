@@ -21,6 +21,8 @@ export interface ProductsPageState {
   restaurant: Member | null;
   chosenProduct: Product | null;
   products: Product[];
+  currentPage: number;       //
+  totalPages: number;
 }
 
 /** ORDERS PAGE **/

@@ -1,37 +1,62 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../../pages/all-food/slice"; // Adjust the import path
+import { RootState } from "../../store"; // Adjust the path if needed
+
 function Pagination() {
+  const dispatch = useDispatch();
+  const currentPage = useSelector(
+    (state: RootState) => state.productsPage.currentPage
+  );
+  const totalPages = 10; // Set your total pages dynamically if needed
+
+  const handlePageChange = (page: number) => {
+    if (page > 0 && page <= totalPages) {
+      dispatch(setCurrentPage(page)); // Dispatch the current page to Redux
+    }
+  };
+
   return (
     <div className="row blog-mt-48px">
-      <div className="col-lg-7 col-md-6 ">
+      <div className="col-lg-8 col-md-6">
         <div className="next-prev-btn">
           <ul>
             <li>
-              <a href="#">
+              <a
+                href="#"
+                onClick={() => handlePageChange(currentPage - 1)} // Go to previous page
+                className="active"
+              >
                 <span>
                   <svg
-                    width="24"
-                    height="24"
+                    width="30"
+                    height="30"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M10 8L6 12M6 12L10 16M6 12L18 12"
-                      stroke="#F01543"
+                      stroke="white"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     ></path>
                   </svg>
                 </span>
+                Previous
               </a>
             </li>
             <li>
-              <a href="#" className="active">
-                Next Page
+              <a
+                href="#"
+                onClick={() => handlePageChange(currentPage + 1)} // Go to next page
+                className="active"
+              >
+                Next
                 <span>
                   <svg
-                    width="24"
-                    height="24"
+                    width="30"
+                    height="30"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -51,21 +76,15 @@ function Pagination() {
         </div>
       </div>
 
-      <div className="col-lg-5 col-md-6">
+      <div className="col-lg-4 col-md-6">
         <nav aria-label="...">
           <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#">
-                Page
-              </a>
+            <li className="page-item active" aria-current="page">
+              <span className="page-link">{currentPage}</span>
             </li>
-            <li className="page-item active " aria-current="page">
-              <span className="page-link">2</span>
-            </li>
+
             <li className="page-item">
-              <a className="page-link" href="#">
-                of 10
-              </a>
+              <span className="page-link">of {totalPages}</span>
             </li>
           </ul>
         </nav>
