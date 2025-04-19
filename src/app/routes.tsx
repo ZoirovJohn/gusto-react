@@ -15,6 +15,8 @@ import SignIn from "./pages/signin";
 import ShoppingCart from "./pages/shopping-cart";
 import FoodDetails from "./pages/foodDetails/foodDetails";
 
+/** HANDLERS **/
+
 const router = createBrowserRouter([
   {
     path: "/",

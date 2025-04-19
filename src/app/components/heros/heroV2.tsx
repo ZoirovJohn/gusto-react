@@ -58,7 +58,7 @@ function HeroV2() {
             </div>
 
             {!authMember ? (
-              <Link to="#" className="main-btn main-btn-two mt-3">
+              <Link to="/sign-up" className="main-btn main-btn-two mt-3">
                 SignUp
               </Link>
             ) : (

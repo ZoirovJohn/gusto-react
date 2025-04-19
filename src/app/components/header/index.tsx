@@ -7,10 +7,39 @@ import useSticky from "../../hooks";
 import MobileNav from "./mobileNav";
 // import defaultLogo from "../../../assets/icons/default-user.svg"
 import defaultLogo from "../../../assets/icons/default-user.svg";
+import { useGlobals } from "../../hooks/useGlobals";
+import MemberService from "../../services/MemberService";
+import {
+  sweetErrorHandling,
+  sweetTopSuccessAlert,
+} from "../../../lib/sweetAlert";
+import { Messages } from "../../../lib/config";
+import { useState } from "react";
 
 function Header({ className, logo }: { className?: string; logo?: string }) {
   const isSticky = useSticky();
-  const authMember = null;
+  const authMember = useGlobals();
+  const { setAuthMember } = useGlobals();
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  /** HANDLERS **/
+
+  const handleLogoutClick = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const handleCloseLogut = () => setAnchorEl(null);
+  const handleLogoutRequest = async () => {
+    try {
+      const member = new MemberService();
+      await member.logout();
+
+      await sweetTopSuccessAlert("success", 700);
+      setAuthMember(null);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(Messages.error1);
+    }
+  };
   return (
     <>
       <header className={`header ${className ? className : ""}`}>
@@ -55,6 +84,7 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                           paddingLeft: "10px",
                         }}
                         aria-haspopup="true"
+                        onClick={handleLogoutClick}
                       />
                     </div>
                   </div>
