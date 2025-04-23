@@ -128,7 +128,7 @@ function Footer() {
                     <div className="quick-line-menu">
                       <ul>
                         <li>
-                          <Link to="">📧 Email: support@gusto.com</Link>
+                          <Link to="">📧 Email: zoirovtokhirjon@gmail.com</Link>
                         </li>
                         <li>
                           <Link to="">📞 Phone: +1 (234) 567-890</Link>
