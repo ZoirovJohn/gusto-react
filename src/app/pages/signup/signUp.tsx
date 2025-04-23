@@ -1,6 +1,6 @@
 import loginImg from "../../../assets/images/thumb/login.png";
 import logoHeader from "../../../assets/images/logo/logo-header.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MemberService from "../../services/MemberService";
 import { Messages } from "../../../lib/config";
@@ -10,6 +10,7 @@ import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
@@ -54,6 +55,7 @@ export default function SignUp() {
       const result = await member.signup(signupInput);
 
       setAuthMember(result);
+      navigate("/")
     } catch (err) {
       console.log("err:", err);
       sweetErrorHandling(err).then();

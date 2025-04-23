@@ -1,11 +1,8 @@
-import NavButton from "./navButton";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import HeaderCart from "./cart";
-// import Loggedin from "./loggedin";
 import logoImg from "../../../assets/images/logo/logo-header.svg";
 import useSticky from "../../hooks";
 import MobileNav from "./mobileNav";
-// import defaultLogo from "../../../assets/icons/default-user.svg"
 import defaultLogo from "../../../assets/icons/default-user.svg";
 import { useGlobals } from "../../hooks/useGlobals";
 import MemberService from "../../services/MemberService";
@@ -14,20 +11,19 @@ import {
   sweetTopSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { Messages } from "../../../lib/config";
-import { useState } from "react";
+import NavButton from "./navButton";
+import HeaderCart from "./cart";
 
 function Header({ className, logo }: { className?: string; logo?: string }) {
   const isSticky = useSticky();
-  const authMember = useGlobals();
-  const { setAuthMember } = useGlobals();
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const { authMember, setAuthMember } = useGlobals();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  /** HANDLERS **/
-
-  const handleLogoutClick = (e: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(e.currentTarget);
+  // Handlers for the logout menu
+  const handleAvatarClick = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
-  const handleCloseLogut = () => setAnchorEl(null);
+
   const handleLogoutRequest = async () => {
     try {
       const member = new MemberService();
@@ -40,6 +36,7 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
       sweetErrorHandling(Messages.error1);
     }
   };
+
   return (
     <>
       <header className={`header ${className ? className : ""}`}>
@@ -49,22 +46,20 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
               <div className="col-lg-12">
                 {authMember ? (
                   <div className="nav-main">
-                    <div className="nav-main">
-                      <div className="menu">
-                        <ul>
-                          <Link to="/">
-                            <img src={logo ? logo : logoImg} alt="logo" />
-                          </Link>
-                          <NavButton title="Home" link="/" />
-                          <NavButton title="Menu" link="/all-food" />
-                          <NavButton
-                            title="Shopping Cart"
-                            link="/shopping-cart"
-                          />
-                          <NavButton title="Help" link="/help" />
-                          <NavButton title="My Profile" link="/myprofile" />
-                        </ul>
-                      </div>
+                    <div className="menu">
+                      <ul>
+                        <Link to="/">
+                          <img src={logo ? logo : logoImg} alt="logo" />
+                        </Link>
+                        <NavButton title="Home" link="/" />
+                        <NavButton title="Menu" link="/all-food" />
+                        <NavButton
+                          title="Shopping Cart"
+                          link="/shopping-cart"
+                        />
+                        <NavButton title="Help" link="/help" />
+                        <NavButton title="My Profile" link="/myprofile" />
+                      </ul>
                     </div>
 
                     <div className="nav-btn-main">
@@ -83,33 +78,33 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                           borderRadius: "24px",
                           paddingLeft: "10px",
                         }}
-                        aria-haspopup="true"
-                        onClick={handleLogoutClick}
+                        onClick={handleAvatarClick}
                       />
+                      {isMenuOpen && (
+                        <div className="logout-menu">
+                          <button onClick={handleLogoutRequest}>Logout</button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ) : (
                   <div className="nav-main">
                     <div className="menu">
-                      <div className="nav-main">
-                        <div className="menu">
-                          <ul>
-                            <div className="logo">
-                              <Link to="/">
-                                <img src={logo ? logo : logoImg} alt="logo" />
-                              </Link>
-                            </div>
-                            <NavButton title="Home" link="/" />
-                            <NavButton title="Menu" link="/all-food" />
-                            <NavButton title="Help" link="/help" />
-                            <div className="nav-login-btn-main">
-                              <Link to="/login" className="main-btn-four">
-                                Log In
-                              </Link>
-                            </div>
-                          </ul>
+                      <ul>
+                        <div className="logo">
+                          <Link to="/">
+                            <img src={logo ? logo : logoImg} alt="logo" />
+                          </Link>
                         </div>
-                      </div>
+                        <NavButton title="Home" link="/" />
+                        <NavButton title="Menu" link="/all-food" />
+                        <NavButton title="Help" link="/help" />
+                        <div className="nav-login-btn-main">
+                          <Link to="/login" className="main-btn-four">
+                            Log In
+                          </Link>
+                        </div>
+                      </ul>
                     </div>
                   </div>
                 )}
@@ -118,7 +113,46 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
           </div>
         </nav>
       </header>
+
       <MobileNav />
+
+      {/* Inline CSS for the dropdown menu */}
+      <style>
+        {`
+          .nav-login-btn-main {
+            position: relative;
+          }
+
+          .logout-menu {
+            position: absolute;
+            top: 60px; /* Adjust this value based on your layout */
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            display: block;
+          }
+
+          .logout-menu button {
+            background-color: transparent;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+          }
+
+          .logout-menu button:hover {
+            background-color: #f4f4f4;
+          }
+
+          .user-avatar {
+            cursor: pointer;
+          }
+        `}
+      </style>
     </>
   );
 }

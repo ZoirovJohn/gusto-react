@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import bannerThumb from "../../../assets/images/thumb/banner-thunb.png";
 import bannerVictor from "../../../assets/images/victor/banner-victor.png";
+import { useGlobals } from "../../hooks/useGlobals";
 
 function HeroV2() {
-  const authMember = null;
+  const { authMember } = useGlobals();
   return (
     <section className="banner">
       <div className="container">
