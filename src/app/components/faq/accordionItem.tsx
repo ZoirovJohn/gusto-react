@@ -6,7 +6,7 @@ function AccordionItem({
 }: {
   title: string;
   summery: string;
-  isActive: string;
+  isActive: string | null; // <-- allow null
   setActive: (title: string) => void;
 }) {
   return (
@@ -15,7 +15,7 @@ function AccordionItem({
         <button
           className={`accordion-button ${
             isActive === title ? "" : " collapsed"
-          } `}
+          }`}
           onClick={() => setActive(title)}
         >
           {title}

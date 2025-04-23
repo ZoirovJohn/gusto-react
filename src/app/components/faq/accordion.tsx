@@ -2,43 +2,42 @@ import { useState } from "react";
 import AccordionItem from "./accordionItem";
 
 function Accordion() {
-  const [activeAccrodion, setActiveAccrodion] = useState(
-    "What type of cuisine does your restaurant offer?"
-  );
+  const [activeAccrodion, setActiveAccrodion] = useState<string | null>(null);
+
+  const toggleAccordion = (title: string) => {
+    if (activeAccrodion === title) {
+      setActiveAccrodion(null); // close if already open
+    } else {
+      setActiveAccrodion(title); // open the clicked one
+    }
+  };
+
   return (
     <div className="faq-main">
       <div className="accordion" id="accordionExample">
         <AccordionItem
           title="What type of cuisine does your restaurant offer?"
-          summery="We offer [insert type of cuisine, e.g., Italian, Asian fusion,
-              Mediterranean] cuisine that combines traditional flavors with
-              modern twists."
+          summery="We offer Italian cuisine that combines traditional flavors with modern twists."
           isActive={activeAccrodion}
-          setActive={setActiveAccrodion}
+          setActive={toggleAccordion}
         />
         <AccordionItem
           title="Can I make a reservation online?"
-          summery="We offer [insert type of cuisine, e.g., Italian, Asian fusion,
-              Mediterranean] cuisine that combines traditional flavors with
-              modern twists."
+          summery="Yes, you can reserve a table through our website."
           isActive={activeAccrodion}
-          setActive={setActiveAccrodion}
+          setActive={toggleAccordion}
         />
         <AccordionItem
           title="Is there a dress code for dining at your restaurant?"
-          summery="We offer [insert type of cuisine, e.g., Italian, Asian fusion,
-              Mediterranean] cuisine that combines traditional flavors with
-              modern twists."
+          summery="Smart casual attire is recommended."
           isActive={activeAccrodion}
-          setActive={setActiveAccrodion}
+          setActive={toggleAccordion}
         />
         <AccordionItem
           title="Is there a dress code for dining your restaurant?"
-          summery="We offer [insert type of cuisine, e.g., Italian, Asian fusion,
-              Mediterranean] cuisine that combines traditional flavors with
-              modern twists."
+          summery="Smart casual is preferred."
           isActive={activeAccrodion}
-          setActive={setActiveAccrodion}
+          setActive={toggleAccordion}
         />
       </div>
     </div>
