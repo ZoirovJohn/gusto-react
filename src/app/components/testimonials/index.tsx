@@ -18,7 +18,7 @@ function Testimonials() {
         <div className="row">
           <TestimonialCard
             img={customerImg1}
-            review={`"An absolute foodie's paradise! The flavors at ReservQ are a
+            review={`"An absolute foodie's paradise! The flavors at Gusto are a
                   symphony of delight. Every bite tells a story of passion and
                   skill. A must-visit for anyone seeking beyond compare."`}
             customerName="Jonson Roy"
@@ -26,7 +26,7 @@ function Testimonials() {
           />
           <TestimonialCard
             img={customerImg2}
-            review={`"An absolute foodie's paradise! The flavors at ReservQ are a
+            review={`"An absolute foodie's paradise! The flavors at Gusto are a
                   symphony of delight. Every bite tells a story of passion and
                   skill. A must-visit for anyone seeking beyond compare."`}
             customerName="David Ethic"
@@ -34,7 +34,7 @@ function Testimonials() {
           />
           <TestimonialCard
             img={customerImg3}
-            review={`"An absolute foodie's paradise! The flavors at ReservQ are a
+            review={`"An absolute foodie's paradise! The flavors at Gusto are a
                   symphony of delight. Every bite tells a story of passion and
                   skill. A must-visit for anyone seeking beyond compare."`}
             customerName="Robert Fox"

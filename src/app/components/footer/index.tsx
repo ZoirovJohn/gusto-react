@@ -1,8 +1,10 @@
 import CopyRight from "./copyRight";
 import logo from "../../../assets/images/logo/footer-logo.svg";
 import { Link } from "react-router-dom";
+import { useGlobals } from "../../hooks/useGlobals";
 
 function Footer() {
+  const { authMember } = useGlobals();
   return (
     <>
       <footer className="footer">
@@ -17,7 +19,7 @@ function Footer() {
 
               <div className="footer-text">
                 <h4>
-                  At ReservQ, we invite you to embark on a journey of taste and
+                  At Gusto, we invite you to embark on a journey of taste and
                   delight.Our tables are more than just places.
                 </h4>
               </div>
@@ -51,26 +53,41 @@ function Footer() {
                     <div className="quick-line-item-head">
                       <h3>Quick Link</h3>
                     </div>
-
-                    <div className="quick-line-menu">
-                      <ul>
-                        <li>
-                          <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                          <Link to="/all-food">Menu</Link>
-                        </li>
-                        <li>
-                          <Link to="/shopping-cart">Shopping cart</Link>
-                        </li>
-                        <li>
-                          <Link to="/myprofile">My profile</Link>
-                        </li>
-                        <li>
-                          <Link to="/help">Help</Link>
-                        </li>
-                      </ul>
-                    </div>
+                    {authMember ? (
+                      <div className="quick-line-menu">
+                        <ul>
+                          <li>
+                            <Link to="/">Home</Link>
+                          </li>
+                          <li>
+                            <Link to="/all-food">Menu</Link>
+                          </li>
+                          <li>
+                            <Link to="/shopping-cart">Shopping cart</Link>
+                          </li>
+                          <li>
+                            <Link to="/myprofile">My profile</Link>
+                          </li>
+                          <li>
+                            <Link to="/help">Help</Link>
+                          </li>
+                        </ul>
+                      </div>
+                    ) : (
+                      <div className="quick-line-menu">
+                        <ul>
+                          <li>
+                            <Link to="/">Home</Link>
+                          </li>
+                          <li>
+                            <Link to="/all-food">Menu</Link>
+                          </li>
+                          <li>
+                            <Link to="/help">Help</Link>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div
