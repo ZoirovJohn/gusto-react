@@ -50,20 +50,6 @@ function ViewModal({ isOpen, close }: { isOpen: boolean; close: () => void }) {
                     Nan ($10.00)
                   </label>
                 </div>
-
-                <div className="form-check-btn">
-                  <div className="form-check-btn">
-                    <div className="grid">
-                      <button className="btn btn-minus ">
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                      <div className="column product-qty">0</div>
-                      <button className="btn btn-plus ">
-                        <i className="fa-solid fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <div className="together-box-item">
                 <div className="form-check">
@@ -73,20 +59,6 @@ function ViewModal({ isOpen, close }: { isOpen: boolean; close: () => void }) {
                   >
                     Extra Chess ($5.00)
                   </label>
-                </div>
-
-                <div className="form-check-btn">
-                  <div className="form-check-btn">
-                    <div className="grid">
-                      <button className="btn btn-minus ">
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                      <div className="column product-qty">0</div>
-                      <button className="btn btn-plus ">
-                        <i className="fa-solid fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
                 </div>
               </div>
 

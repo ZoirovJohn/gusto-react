@@ -77,7 +77,11 @@ function ShoppingCartSec() {
                       <table className="table">
                         <tbody>
                           {cartInfo?.map((cartItem) => (
-                            <CartItem key={cartItem.id} {...cartItem} />
+                            <CartItem
+                              key={cartItem.id}
+                              {...cartItem}
+                              pageName="pausedOrders"
+                            />
                           ))}
                         </tbody>
                       </table>
@@ -147,7 +151,11 @@ function ShoppingCartSec() {
                       <table className="table">
                         <tbody>
                           {cartInfo?.map((cartItem) => (
-                            <CartItem key={cartItem.id} {...cartItem} />
+                            <CartItem
+                              key={cartItem.id}
+                              {...cartItem}
+                              pageName="processOrders"
+                            />
                           ))}
                         </tbody>
                       </table>
@@ -214,7 +222,11 @@ function ShoppingCartSec() {
                       <table className="table">
                         <tbody>
                           {cartInfo?.map((cartItem) => (
-                            <CartItem key={cartItem.id} {...cartItem} />
+                            <CartItem
+                              key={cartItem.id}
+                              {...cartItem}
+                              pageName="finishedOrders"
+                            />
                           ))}
                         </tbody>
                       </table>
