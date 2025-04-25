@@ -4,13 +4,13 @@ import logo from "../../../assets/images/logo/footer-logo.svg";
 import Breadcrumbs from "../../components/breadcrumbs";
 import Layout from "../../components/dashboard/layout";
 
-function Dashboard({ children }: { children?: React.ReactElement }) {
+function Dashboard() {
   return (
     <div>
       <Header className="header-two  header-three" logo={logo} />
       <main>
         <Breadcrumbs title="My Profile" address="My Profile" />
-        <Layout children={children} />
+        <Layout />
       </main>
       <Footer />
     </div>

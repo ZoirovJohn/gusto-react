@@ -3373,7 +3373,7 @@ p {
   padding: 33px;
   border-radius: 10px;
   background-color: var(--grey-scale-100);
-  margin-top: 32px;
+  margin-top: -22px;
 }
 .dashboard
   .dashboard-edit-profile-from

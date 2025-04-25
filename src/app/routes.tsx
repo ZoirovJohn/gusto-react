@@ -5,11 +5,6 @@ import Grid from "./pages/all-food/grid";
 import Help from "./pages/help";
 import Dashboard from "./pages/dashboard";
 import EditProfile from "./pages/dashboard/edit-profile";
-import Address from "./pages/dashboard/address";
-import Order from "./pages/dashboard/order";
-import Wishlist from "./pages/dashboard/wishlist";
-import Reviews from "./pages/dashboard/reviews";
-import ChangePassword from "./pages/dashboard/changePassword";
 import SignUp from "./pages/signup/signUp";
 import SignIn from "./pages/signin";
 import ShoppingCart from "./pages/shopping-cart";
@@ -49,26 +44,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <EditProfile />,
-      },
-      {
-        path: "edit-address",
-        element: <Address />,
-      },
-      {
-        path: "order&recordering",
-        element: <Order />,
-      },
-      {
-        path: "wishlist",
-        element: <Wishlist />,
-      },
-      {
-        path: "reviews",
-        element: <Reviews />,
-      },
-      {
-        path: "change-password",
-        element: <ChangePassword />,
       },
     ],
   },

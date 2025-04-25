@@ -57,8 +57,8 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                           title="Shopping Cart"
                           link="/shopping-cart"
                         />
-                        <NavButton title="Help" link="/help" />
                         <NavButton title="My Profile" link="/myprofile" />
+                        <NavButton title="Help" link="/help" />
                       </ul>
                     </div>
 
