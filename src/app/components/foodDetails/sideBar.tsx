@@ -23,7 +23,7 @@ function SideBar() {
     image: product?.productImages[0],
   };
 
-  const handleOnAdd = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleOnAdd = async (e: React.MouseEvent<HTMLElement>) => {
     try {
       if (!authMember) {
         await sweetErrorHandling(Messages.error2);
@@ -142,12 +142,7 @@ function SideBar() {
         </div>
 
         <div className="together-box-inner-btn-btm">
-          <a
-            href=""
-            className="main-btn-six"
-            tabIndex={-1}
-            onClick={handleOnAdd}
-          >
+          <button type="button" className="main-btn-six" onClick={handleOnAdd}>
             <span>
               <svg
                 width="24"
@@ -185,7 +180,7 @@ function SideBar() {
               </svg>
             </span>
             Add to Basket
-          </a>
+          </button>
         </div>
       </div>
     </div>
