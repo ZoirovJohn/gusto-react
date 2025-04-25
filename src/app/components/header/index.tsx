@@ -90,7 +90,6 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                           width: "50px",
                           height: "50px",
                           borderRadius: "50%",
-                          // paddingLeft: "10px",
                         }}
                         onClick={handleAvatarClick}
                       />
