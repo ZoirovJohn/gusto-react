@@ -58,7 +58,11 @@ function FeaturedFood() {
             }}
           >
             {newDishes?.map((product) => (
-              <FoodCard key={product._id} product={product} className=" pb-48" />
+              <FoodCard
+                key={product._id}
+                product={product}
+                className=" pb-48"
+              />
             ))}
           </Slider>
         </div>
