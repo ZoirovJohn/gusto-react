@@ -605,7 +605,7 @@
   }
 
   .shopping-cart .table > :not(caption) > * > * {
-    padding: 19px 0 19px 10px;
+    padding: 8px 0;
   }
 
   .delivery-map iframe {

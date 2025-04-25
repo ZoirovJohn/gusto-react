@@ -25,58 +25,27 @@ function CartItem({
     <>
       <ViewModal isOpen={viewProduct} close={() => setViewProduct(false)} />
       <tr>
-        <td className="details-control">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="checkboxNoLabel-0"
-            value=""
-            aria-label="..."
-          />
-        </td>
-        <td>
-          <div className="tabel-item">
-            <div className="tabel-img">
-              <img src={image} alt="img" />
-            </div>
+        <td style={{ border: "none" }}>
+          <div className="tabel-img">
+            <img
+              src={image}
+              alt="img"
+              style={{
+                width: "50px",
+                height: "50px",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
           </div>
         </td>
-        <td>
+
+        <td style={{ width: "250px", border: "none" }}>
           <div className="tabel-text">
-            <h5>{title}</h5>
-            <a href="#">
-              <span>Size :</span> {size}
-            </a>
-            <p>
-              <span>Addon :</span>
-              {addon} (+${addonPrice})
-            </p>
+            <h5 style={{marginLeft:"-50px"}}>{title.length > 20 ? title.slice(0, 20) + ".." : title}</h5>
           </div>
         </td>
-        <td>
-          <div className="tabel-text">
-            <h6>${unitPrice}</h6>
-          </div>
-        </td>
-        <td>
-          <div className="tabel-text-btn">
-            <div className="grid">
-              <button className="btn btn-minus ">
-                <i className="fa-solid fa-minus"></i>
-              </button>
-              <div className="column product-qty">{qty}</div>
-              <button className="btn btn-plus ">
-                <i className="fa-solid fa-plus"></i>
-              </button>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div className="tabel-text">
-            <h6>${totalPrice}</h6>
-          </div>
-        </td>
-        <td>
+        <td style={{ border: "none" }}>
           <div className="tabel-modal-btn">
             <button
               type="button"
@@ -85,8 +54,8 @@ function CartItem({
             >
               <span>
                 <svg
-                  width="24"
-                  height="24"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -101,24 +70,18 @@ function CartItem({
               </span>{" "}
               View
             </button>
-            <a href="#">
-              <span>
-                <svg
-                  width="17"
-                  height="20"
-                  viewBox="0 0 17 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M5.834 0.890599C6.20493 0.334202 6.8294 0 7.4981 0H9.35737C10.0261 0 10.6505 0.334202 11.0215 0.8906L11.9277 2.25H15.6777C16.0919 2.25 16.4277 2.58579 16.4277 3C16.4277 3.41421 16.0919 3.75 15.6777 3.75H1.17773C0.763521 3.75 0.427734 3.41421 0.427734 3C0.427734 2.58579 0.763521 2.25 1.17773 2.25H4.92773L5.834 0.890599ZM11.4277 20H5.42773C3.2186 20 1.42773 18.2091 1.42773 16V5H15.4277V16C15.4277 18.2091 13.6369 20 11.4277 20ZM6.42773 8.25C6.84195 8.25 7.17773 8.58579 7.17773 9V16C7.17773 16.4142 6.84195 16.75 6.42773 16.75C6.01352 16.75 5.67773 16.4142 5.67773 16L5.67773 9C5.67773 8.58579 6.01352 8.25 6.42773 8.25ZM10.4277 8.25C10.8419 8.25 11.1777 8.58579 11.1777 9V16C11.1777 16.4142 10.8419 16.75 10.4277 16.75C10.0135 16.75 9.67774 16.4142 9.67773 16V9C9.67773 8.58579 10.0135 8.25 10.4277 8.25Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-            </a>
+          </div>
+        </td>
+        <td style={{ border: "none" }}>
+          <div className="tabel-text">
+            <h6>
+              <span>Size :</span> {size}
+            </h6>
+          </div>
+        </td>
+        <td style={{ border: "none" }}>
+          <div className="tabel-text">
+            <h6>${unitPrice} x 3 = $360</h6>
           </div>
         </td>
       </tr>

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import commentImg1 from "../../../assets/images/small/comments-1.png";
-import commentImg2 from "../../../assets/images/small/comments-2.png";
-import commentImg3 from "../../../assets/images/small/comments-3.png";
 import CommentForm from "./commentForm";
-import Comment from "./comment";
+
 import VideoPlayer from "./videoPlayer";
+import { cartInfo } from "../../../lib/data/shoppingCarts";
+import CartItem from "../header/cartItem";
 
 function FoodDescription() {
   const [activeDescription, setActiveDescription] = useState("Food Details");
@@ -25,7 +24,30 @@ function FoodDescription() {
             Food Details
           </button>
         </li>
-
+        <li className="nav-item" role="presentation">
+          <button
+            className={`nav-link ${
+              activeDescription === "Food Video" ? "active" : ""
+            }`}
+            onClick={(e) =>
+              setActiveDescription((e.target as HTMLElement)?.innerText)
+            }
+          >
+            Food Video
+          </button>
+        </li>
+        <li className="nav-item" role="presentation">
+          <button
+            className={`nav-link ${
+              activeDescription === "Review" ? "active" : ""
+            }`}
+            onClick={(e) =>
+              setActiveDescription((e.target as HTMLElement)?.innerText)
+            }
+          >
+            Review
+          </button>
+        </li>
         <hr />
       </ul>
       <div className="tab-content">
@@ -34,18 +56,7 @@ function FoodDescription() {
             activeDescription === "Food Details" ? "show active" : ""
           }`}
         >
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="food-details-text">
-                <p>
-                  Indulge in a mouthwatering culinary delight with our Chicken
-                  Skewers paired with vibrant slices of sweet bell peppers.
-                  Tender pieces of succulent chicken are marinated to
-                  perfection, resulting in a flavorful and juicy experience.{" "}
-                </p>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <div
           className={`tab-pane fade ${
@@ -83,28 +94,6 @@ function FoodDescription() {
           }`}
         >
           <div className="food-review">
-            <Comment
-              authorImage={commentImg1}
-              authorName="Michel Holder"
-              authorProfession="Dog Trainer"
-              date="June 1, 2022 at 11:27 AM"
-              comment="Sure there isn't anything embarrassing hidden in the middles of text. All into a Some this erato Internet tend to repeat predefined chunks."
-            />
-            <Comment
-              authorImage={commentImg2}
-              authorName="Kathryn Murphy"
-              authorProfession="Dog Trainer"
-              date="June 1, 2022 at 11:27 AM"
-              comment="Sure there isn't anything embarrassing hidden in the middles of text. All into a Some this erato Internet tend to repeat predefined chunks."
-            />
-            <Comment
-              authorImage={commentImg3}
-              authorName="Albert Flores"
-              authorProfession="Dog Trainer"
-              date="June 1, 2022 at 11:27 AM"
-              comment="Sure there isn't anything embarrassing hidden in the middles of text. All into a Some this erato Internet tend to repeat predefined chunks."
-            />
-
             <div className="food-review-item-btn">
               <Link to="/blog-details" className="main-btn">
                 See more
