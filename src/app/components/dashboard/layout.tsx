@@ -1,6 +1,92 @@
-import userImg from "../../../assets/images/small/dashboard-menu-profile-img.png";
+import defaultLogo from "../../../assets/icons/default-user.svg";
+import { useGlobals } from "../../hooks/useGlobals";
+import { Messages, serverApi } from "../../../lib/config";
+import { useState } from "react";
+import { MemberUpdateInput } from "../../../lib/types/member";
+import { T } from "../../../lib/types/common";
+import MemberService from "../../services/MemberService";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
 
 function Layout() {
+  const { authMember, setAuthMember } = useGlobals();
+  const [memberImage, setMemberImage] = useState<string>(
+    authMember?.memberImage
+      ? `${serverApi}/${authMember.memberImage}`
+      : defaultLogo
+  );
+  console.log("authMember?.memberImage:", authMember?.memberImage);
+
+  const [memberUpdateInput, setMemberUpdateInput] = useState<MemberUpdateInput>(
+    {
+      memberNick: authMember?.memberNick,
+      memberPhone: authMember?.memberPhone,
+      memberAddress: authMember?.memberAddress,
+      memberDesc: authMember?.memberDesc,
+      memberImage: authMember?.memberImage,
+    }
+  );
+
+  /** HANDLERS **/
+  const memberNickHandler = (e: T) => {
+    memberUpdateInput.memberNick = e.target.value;
+    setMemberUpdateInput({ ...memberUpdateInput });
+  };
+  const memberPhoneHandler = (e: T) => {
+    memberUpdateInput.memberPhone = e.target.value;
+    setMemberUpdateInput({ ...memberUpdateInput });
+  };
+  const memberAddressHandler = (e: T) => {
+    memberUpdateInput.memberAddress = e.target.value;
+    setMemberUpdateInput({ ...memberUpdateInput });
+  };
+  const memberDescHandler = (e: T) => {
+    memberUpdateInput.memberDesc = e.target.value;
+    setMemberUpdateInput({ ...memberUpdateInput });
+  };
+
+  const handleSubmitButton = async () => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      console.log("memberUpdateInput:", memberUpdateInput);
+
+      if (
+        memberUpdateInput.memberNick === "" &&
+        memberUpdateInput.memberPhone === "" &&
+        memberUpdateInput.memberAddress === "" &&
+        memberUpdateInput.memberDesc === ""
+      ) {
+        throw new Error(Messages.error3);
+      }
+
+      const member = new MemberService();
+      const result = await member.updateMember(memberUpdateInput);
+      setAuthMember(result);
+
+      await sweetTopSmallSuccessAlert("Modified successfully!", 700);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  const handleImageViewer = (e: T) => {
+    const file = e.target.files[0];
+    console.log("file:", file);
+    const fileType = file.type,
+      validateImageTypes = ["image/jpg", "image/jpeg", "image/png"];
+
+    if (!validateImageTypes.includes(fileType)) {
+      sweetErrorHandling(Messages.error5).then();
+    } else {
+      memberUpdateInput.memberImage = file;
+      setMemberUpdateInput({ ...memberUpdateInput });
+      setMemberImage(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <section className="dashboard">
       <div className="container">
@@ -18,7 +104,16 @@ function Layout() {
                   style={{ marginLeft: "30px" }}
                 >
                   <p></p>
-                  <img src={userImg} alt="img" />
+                  <img
+                    src={memberImage}
+                    alt="img"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      borderRadius: "50%",
+                    }}
+                  />
+
                   <div className="dashboard-menu-profile-text">
                     <p>Upload image: JPG, JPEG, PNG formats only!</p>
                   </div>
@@ -32,17 +127,21 @@ function Layout() {
                           name="default"
                           id="default"
                           className="border p-2"
+                          onChange={handleImageViewer}
                         />
                       </div>
                     </div>
                     <div className="shopping-cart-new-address-from-item">
                       <div className="shopping-cart-new-address-from-inner">
-                        <label className="form-label">First Name</label>
+                        <label className="form-label">Name</label>
                         <input
                           type="text"
                           className="form-control"
                           id="exampleFormControlInput11"
-                          placeholder="First Name"
+                          placeholder={authMember?.memberNick}
+                          value={memberUpdateInput.memberNick}
+                          name="memberNick"
+                          onChange={memberNickHandler}
                         />
                       </div>
                       <div className="shopping-cart-new-address-from-inner">
@@ -51,20 +150,14 @@ function Layout() {
                           type="text"
                           className="form-control"
                           id="exampleFormControlInput12"
-                          placeholder="+82 10 7777 0000"
+                          placeholder={authMember?.memberPhone ?? "no phone"}
+                          value={memberUpdateInput.memberPhone}
+                          name="memberPhone"
+                          onChange={memberPhoneHandler}
                         />
                       </div>
                     </div>
                     <div className="shopping-cart-new-address-from-item">
-                      <div className="shopping-cart-new-address-from-inner">
-                        <label className="form-label">Email Address</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="exampleFormControlInput8"
-                          placeholder="Email Address"
-                        />
-                      </div>
                       <div className="shopping-cart-new-address-from-inner">
                         <label
                           htmlFor="exampleFormControlInput1"
@@ -76,16 +169,42 @@ function Layout() {
                           type="text"
                           className="form-control"
                           id="exampleFormControlInput13"
-                          placeholder="Address"
+                          placeholder={
+                            authMember?.memberAddress
+                              ? authMember.memberAddress
+                              : "no address"
+                          }
+                          value={memberUpdateInput.memberAddress}
+                          name="memberAddress"
+                          onChange={memberAddressHandler}
+                        />
+                      </div>
+                      <div className="shopping-cart-new-address-from-inner">
+                        <label className="form-label">Decsription</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="exampleFormControlInput8"
+                          placeholder={
+                            authMember?.memberDesc
+                              ? authMember.memberDesc
+                              : "no description"
+                          }
+                          value={memberUpdateInput.memberDesc}
+                          name="memberDesc"
+                          onChange={memberDescHandler}
                         />
                       </div>
                     </div>
 
                     <div className="shopping-cart-new-address-from-btn">
                       <div className="check-btn-two">
-                        <a href="#" className="main-btn-four">
+                        <button
+                          className="main-btn-four"
+                          onClick={handleSubmitButton}
+                        >
                           Save now
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>

@@ -10,7 +10,7 @@ import {
   sweetErrorHandling,
   sweetTopSuccessAlert,
 } from "../../../lib/sweetAlert";
-import { Messages } from "../../../lib/config";
+import { Messages, serverApi } from "../../../lib/config";
 import NavButton from "./navButton";
 import HeaderCart from "./cart";
 
@@ -71,12 +71,16 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                     <div className="nav-login-btn-main">
                       <img
                         className="user-avatar"
-                        src={defaultLogo}
+                        src={
+                          authMember?.memberImage
+                            ? `${serverApi}/${authMember.memberImage}`
+                            : defaultLogo
+                        }
                         style={{
                           width: "50px",
                           height: "50px",
-                          borderRadius: "24px",
-                          paddingLeft: "10px",
+                          borderRadius: "50%",
+                          // paddingLeft: "10px",
                         }}
                         onClick={handleAvatarClick}
                       />
