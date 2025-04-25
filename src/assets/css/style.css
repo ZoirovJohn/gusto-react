@@ -492,7 +492,7 @@ p {
 .header .menu-bg .nav-btn-main .nav-btn-two .cart .cart-dropdown {
   position: absolute;
   top: 75px;
-  left: -75px;
+  left: -175px;
   background-color: #fff;
   width: 484px;
   display: none;
@@ -814,7 +814,7 @@ p {
   .cart
   .cart-dropdown
   .cart-dropdown-sub-total {
-  padding: 110px 24px 0 24px;
+  padding: 20px 24px 0 24px;
   line-height: 0;
   text-align: start;
 }
