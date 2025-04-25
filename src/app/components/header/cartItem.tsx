@@ -1,6 +1,6 @@
 import { serverApi } from "../../../lib/config";
 import { CartItemType } from "../../../lib/types/search";
-import useBasket from "../../hooks/useBasket";
+import { useBasket } from "../../hooks/BasketProvider";
 
 function CartItem({ item }: { item: CartItemType }) {
   const imagePath = `${serverApi}/${item.image}`;

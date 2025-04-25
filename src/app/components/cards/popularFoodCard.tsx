@@ -113,7 +113,7 @@ function PopularFoodCard({ product }: { product: Product }) {
                     ></path>
                   </svg>
                 </span>
-                Add to Cart
+                Add to Basket
               </Link>
             </div>
           </div>

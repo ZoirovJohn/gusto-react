@@ -174,7 +174,7 @@ function SideBar() {
                 ></path>
               </svg>
             </span>
-            Add to Cart
+            Add to Basket
           </a>
         </div>
       </div>

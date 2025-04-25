@@ -1,15 +1,9 @@
-import { cartInfo } from "../../../lib/data/shoppingCarts";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import noimage from "../../../assets/icons/noimage-list.svg";
 import moment from "moment";
 import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
-import {
-  Order,
-  OrderInquiry,
-  OrderItem,
-  OrderUpdateInput,
-} from "../../../lib/types/orders";
+import { Order, OrderInquiry, OrderItem } from "../../../lib/types/orders";
 import { useGlobals } from "../../hooks/useGlobals";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
@@ -24,7 +18,6 @@ import {
 } from "./selector";
 import { Messages } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
-import { T } from "../../../lib/types/common";
 
 function ShoppingCartSec() {
   const [value, setValue] = useState("PAUSED ORDERS");
@@ -199,7 +192,6 @@ function ShoppingCartSec() {
                             <PausedOrders
                               key={item._id}
                               item={item}
-                              setValue={setValue}
                               order={order}
                             />
                           ))}
@@ -304,7 +296,6 @@ function ShoppingCartSec() {
                             <ProcessOrders
                               key={item._id}
                               item={item}
-                              setValue={setValue}
                               order={order}
                             />
                           ))}
@@ -401,7 +392,6 @@ function ShoppingCartSec() {
                             <FinishedOrders
                               key={item._id}
                               item={item}
-                              setValue={setValue}
                               order={order}
                             />
                           ))}

@@ -482,7 +482,7 @@ p {
 }
 .header .menu-bg .nav-btn-main .nav-btn-two .cart::after {
   position: absolute;
-  content: "3";
+  /* content: "3"; */
 }
 .header .menu-bg .nav-btn-main .nav-btn-two .cart .click {
   position: absolute;
@@ -577,7 +577,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 20px 0;
+  padding-top: 10px;
 }
 .header
   .menu-bg

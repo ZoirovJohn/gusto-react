@@ -122,10 +122,8 @@ function SignIn() {
             </div>
 
             <div className="sign-up-btn">
-              <div className="main-btn-four">
-                <Link to="" onClick={handleLoginRequest}>
-                  Log In
-                </Link>
+              <div className="main-btn-four" onClick={handleLoginRequest}>
+                <Link to="">Log In</Link>
               </div>
 
               <p>

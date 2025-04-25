@@ -10,6 +10,7 @@ import { RootState } from "../../store"; // Adjust the path if needed
 function FilterMenu() {
   const dispatch = useDispatch();
   const { component } = useParams();
+  
   const currentPage = useSelector(
     (state: RootState) => state.productsPage.currentPage
   ); // Get current page from Redux

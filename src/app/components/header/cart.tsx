@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useBasket from "../../hooks/useBasket";
 import { CartItemType } from "../../../lib/types/search";
 import OrderService from "../../services/OrderService";
 import { Messages } from "../../../lib/config";
 import { useGlobals } from "../../hooks/useGlobals";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import CartItem from "./cartItem";
+import { useBasket } from "../../hooks/BasketProvider";
 
 function HeaderCart() {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +87,7 @@ function HeaderCart() {
       >
         <div className="cart-dropdown-text">
           <div className="text">
-            <h3>My Cart</h3>
+            <h3>My Basket</h3>
           </div>
 
           <div className="cart-dropdown-btn">
@@ -150,9 +150,50 @@ function HeaderCart() {
           </div>
         )}
 
-        {cartItems.map((item: CartItemType) => {
-          return <CartItem item={item} />;
-        })}
+        <style>
+          {`
+          .orders-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .orders-wrapper::-webkit-scrollbar {
+            width: 8px;
+          }
+
+          .orders-wrapper::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+          }
+
+          .orders-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+          }
+          `}
+        </style>
+
+        <div
+          className="orders-main-wrapper"
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            marginTop: "10px",
+            width: "100%",
+            height: "260px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div className="orders-wrapper">
+            {cartItems.map((item: CartItemType) => (
+              <CartItem key={item._id} item={item} />
+            ))}
+          </div>
+        </div>
 
         {cartItems.length !== 0 ? (
           <div className="cart-dropdown-sub-total">
@@ -187,6 +228,13 @@ function HeaderCart() {
           ""
         )}
       </div>
+      <style>
+        {`
+          .header .menu-bg .nav-btn-main .nav-btn-two .cart::after {
+            content: "${cartItems.length}";
+          }
+        `}
+      </style>
     </div>
   );
 }

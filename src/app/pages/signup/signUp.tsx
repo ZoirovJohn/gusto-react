@@ -87,12 +87,12 @@ export default function SignUp() {
               src={logoHeader}
               alt="logo"
               style={{
-                height: "46px", 
-                width: "auto", 
+                height: "46px",
+                width: "auto",
                 maxWidth: "200px",
-                objectFit: "cover", 
-                objectPosition: "center", 
-                margin: "0", 
+                objectFit: "cover",
+                objectPosition: "center",
+                margin: "0",
               }}
             />
           </Link>
@@ -143,10 +143,8 @@ export default function SignUp() {
             </div>
 
             <div className="sign-up-btn">
-              <div className="main-btn-four">
-                <Link to="" onClick={handleSignupRequest}>
-                  Sign Up
-                </Link>
+              <div className="main-btn-four" onClick={handleSignupRequest}>
+                <Link to="">Sign Up</Link>
               </div>
 
               <p>

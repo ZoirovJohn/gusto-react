@@ -1,24 +1,15 @@
 import { useState } from "react";
 import ViewModal from "./viewModal";
-import { useSelector } from "react-redux";
-import { retrievePausedOrders } from "./selector";
-import { useGlobals } from "../../hooks/useGlobals";
-import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/orders";
-import { OrderStatus } from "../../../lib/enums/order.enum";
-import OrderService from "../../services/OrderService";
-import { Messages, serverApi } from "../../../lib/config";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
-import { T } from "../../../lib/types/common";
+import { Order, OrderItem } from "../../../lib/types/orders";
+import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
 
 function ProcessOrders({
   item,
   order,
-  setValue,
 }: {
   item: OrderItem;
   order: Order;
-  setValue: (input: string) => void;
 }) {
   const [viewProduct, setViewProduct] = useState(false);
 

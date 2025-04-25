@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { Product } from "../../../lib/types/product";
 import { Messages, serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
-import useBasket from "../../hooks/useBasket";
 import {
   sweetErrorHandling,
   sweetTopSuccessAlert,
 } from "../../../lib/sweetAlert";
+import { useBasket } from "../../hooks/BasketProvider";
 
 function FoodCard({
   product,
@@ -36,16 +36,20 @@ function FoodCard({
 
   const handleOnAdd = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     try {
-      onAdd({
-        _id: _id,
-        quantity: 1,
-        name: productName,
-        price: productPrice,
-        image: productImages[0],
-      });
-      e.stopPropagation();
+      if (!true) {
+        
+      } else {
+        onAdd({
+          _id: _id,
+          quantity: 1,
+          name: productName,
+          price: productPrice,
+          image: productImages[0],
+        });
+        e.stopPropagation();
 
-      await sweetTopSuccessAlert("success", 700);
+        await sweetTopSuccessAlert("success", 700);
+      }
     } catch (err) {
       console.log(err);
       sweetErrorHandling(Messages.error1);
@@ -178,7 +182,7 @@ function FoodCard({
                     />
                   </svg>
                 </span>
-                Add to Cart
+                Add to Basket
               </Link>
             </div>
           </div>

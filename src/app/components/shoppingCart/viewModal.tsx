@@ -1,7 +1,5 @@
-import image from "../../../assets/images/thumb/featured-1.png";
 import { Order, OrderItem } from "../../../lib/types/orders";
 import { Product } from "../../../lib/types/product";
-import { useBasket } from "../../hooks/BasketProvider";
 
 function ViewModal({
   isOpen,
