@@ -1,10 +1,34 @@
 import promoImg2 from "../../../assets/images/thumb/promobanner-02.png";
 import { useSelector } from "react-redux";
 import { retrieveChosenProduct } from "../../pages/all-food/selector";
+import { useBasket } from "../../hooks/BasketProvider";
+import { sweetErrorHandling, sweetTopSuccessAlert } from "../../../lib/sweetAlert";
+import { Messages } from "../../../lib/config";
 
 function SideBar() {
   const product = useSelector(retrieveChosenProduct);
   const ingredients = product?.productIngredient?.split(",") || [];
+  const { onAdd } = useBasket();
+  const viewItem = {
+    _id: product?._id || "",
+    quantity: 1,
+    name: product?.productName || "",
+    price: product?.productPrice || 0,
+    image: product?.productImages[0],
+  };
+
+  const handleOnAdd = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    try {
+      onAdd(viewItem);
+      e.preventDefault();
+      e.stopPropagation();
+
+      await sweetTopSuccessAlert("success", 700);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(Messages.error1);
+    }
+  };
 
   return (
     <div className="col-lg-4 mt-5">
@@ -35,7 +59,6 @@ function SideBar() {
             ))}
           </div>
 
-          {/* Views and Likes */}
           <div
             className="product-meta"
             style={{
@@ -109,7 +132,12 @@ function SideBar() {
         </div>
 
         <div className="together-box-inner-btn-btm">
-          <a href="#" className="main-btn-six" tabIndex={-1}>
+          <a
+            href=""
+            className="main-btn-six"
+            tabIndex={-1}
+            onClick={handleOnAdd}
+          >
             <span>
               <svg
                 width="24"

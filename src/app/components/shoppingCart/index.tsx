@@ -124,7 +124,7 @@ function ShoppingCartSec() {
           orderId,
           orderStatus: OrderStatus.FINISH,
         });
-        setValue("3");
+        setValue("FINISHED ORDERS");
         setOrderBuilder(new Date());
       }
     } catch (err) {
@@ -205,8 +205,6 @@ function ShoppingCartSec() {
                           ))}
                         </tbody>
                       </table>
-
-                      {/* <!-- modal  --> */}
                     </div>
 
                     <div
@@ -312,8 +310,6 @@ function ShoppingCartSec() {
                           ))}
                         </tbody>
                       </table>
-
-                      {/* <!-- modal  --> */}
                     </div>
 
                     <div

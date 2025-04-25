@@ -29,7 +29,14 @@ function PausedOrders({
 
   return (
     <>
-      <ViewModal isOpen={viewProduct} close={() => setViewProduct(false)} />
+      <ViewModal
+        isOpen={viewProduct}
+        close={() => setViewProduct(false)}
+        item={item}
+        order={order}
+        product={product}
+        imagePath={imagePath}
+      />
       <tr>
         <td style={{ border: "none" }}>
           <div className="tabel-img">

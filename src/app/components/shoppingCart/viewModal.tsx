@@ -1,6 +1,26 @@
 import image from "../../../assets/images/thumb/featured-1.png";
+import { Order, OrderItem } from "../../../lib/types/orders";
+import { Product } from "../../../lib/types/product";
+import { useBasket } from "../../hooks/BasketProvider";
 
-function ViewModal({ isOpen, close }: { isOpen: boolean; close: () => void }) {
+function ViewModal({
+  isOpen,
+  close,
+  item,
+  order,
+  product,
+  imagePath,
+}: {
+  isOpen: boolean;
+  close: () => void;
+  item: OrderItem;
+  order: Order;
+  product: Product;
+  imagePath: string;
+}) {
+  const productIngredients: string[] | undefined =
+    product?.productIngredient?.split(",");
+  const totalPrice = item?.itemPrice * item?.itemQuantity;
   return (
     <div
       className="modal fade show modal-open-animation"
@@ -31,50 +51,38 @@ function ViewModal({ isOpen, close }: { isOpen: boolean; close: () => void }) {
           <div className="modal-body">
             <div className="featured-item  ">
               <div className="featured-item-img">
-                <img src={image} className="w-100" alt="featured-thumb" />
+                <img src={imagePath} className="w-100" alt="featured-thumb" />
               </div>
             </div>
 
             <div className="modal-body-text">
-              <h3>Eggplant Baked with Cheese </h3>
-              <h5>$30.00</h5>
+              <h3>
+                {product?.productName.length > 20
+                  ? product?.productName.slice(0, 20) + ".."
+                  : product?.productName}
+              </h3>
+              <h5>${item?.itemPrice}</h5>
             </div>
 
             <div className="modal-body-item-box">
-              <div className="together-box-item">
-                <div className="form-check">
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault2"
-                  >
-                    Nan ($10.00)
-                  </label>
+              {productIngredients?.map((ingredient) => (
+                <div className="together-box-item">
+                  <div className="form-check">
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexCheckDefault2"
+                    >
+                      {ingredient}
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div className="together-box-item">
-                <div className="form-check">
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault3"
-                  >
-                    Extra Chess ($5.00)
-                  </label>
-                </div>
-              </div>
+              ))}
 
               <div className="together-box-inner-btn">
                 <div className="modal-main">
                   <div className="grid-text">
-                    <p>Select Quantity</p>
-                  </div>
-                  <div className="grid">
-                    <button className="btn btn-minus ">
-                      <i className="fa-solid fa-minus"></i>
-                    </button>
-                    <div className="column product-qty">2</div>
-                    <button className="btn btn-plus ">
-                      <i className="fa-solid fa-plus"></i>
-                    </button>
+                    <p>Product Quantity</p>
+                    <p>{item?.itemQuantity}</p>
                   </div>
                 </div>
 
@@ -83,14 +91,22 @@ function ViewModal({ isOpen, close }: { isOpen: boolean; close: () => void }) {
                     <p>Total Price</p>
                   </div>
                   <div className="together-box-inner-btn-dropdown">
-                    <h4 style={{ fontWeight: "600" }}> $40</h4>
+                    <h4 style={{ fontWeight: "600" }}> ${totalPrice}</h4>
                   </div>
                 </div>
               </div>
 
               <div className="together-box-inner-btn-btm">
-                <a href="#" className="main-btn-six" tabIndex={-1}>
-                  Apply Changes
+                <a
+                  href=""
+                  className="main-btn-six"
+                  tabIndex={-1}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    close();
+                  }}
+                >
+                  OK
                 </a>
               </div>
             </div>
