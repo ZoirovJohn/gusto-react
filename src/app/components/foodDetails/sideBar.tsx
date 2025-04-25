@@ -2,13 +2,19 @@ import promoImg2 from "../../../assets/images/thumb/promobanner-02.png";
 import { useSelector } from "react-redux";
 import { retrieveChosenProduct } from "../../pages/all-food/selector";
 import { useBasket } from "../../hooks/BasketProvider";
-import { sweetErrorHandling, sweetTopSuccessAlert } from "../../../lib/sweetAlert";
+import {
+  sweetErrorHandling,
+  sweetTopSuccessAlert,
+} from "../../../lib/sweetAlert";
 import { Messages } from "../../../lib/config";
+import { useGlobals } from "../../hooks/useGlobals";
 
 function SideBar() {
   const product = useSelector(retrieveChosenProduct);
   const ingredients = product?.productIngredient?.split(",") || [];
   const { onAdd } = useBasket();
+  const { authMember } = useGlobals();
+
   const viewItem = {
     _id: product?._id || "",
     quantity: 1,
@@ -19,11 +25,15 @@ function SideBar() {
 
   const handleOnAdd = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     try {
-      onAdd(viewItem);
-      e.preventDefault();
-      e.stopPropagation();
+      if (!authMember) {
+        await sweetErrorHandling(Messages.error2);
+      } else {
+        onAdd(viewItem);
+        e.preventDefault();
+        e.stopPropagation();
 
-      await sweetTopSuccessAlert("success", 700);
+        await sweetTopSuccessAlert("success", 700);
+      }
     } catch (err) {
       console.log(err);
       sweetErrorHandling(Messages.error1);

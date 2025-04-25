@@ -1,18 +1,16 @@
-import { Order, OrderItem } from "../../../lib/types/orders";
+import { OrderItem } from "../../../lib/types/orders";
 import { Product } from "../../../lib/types/product";
 
 function ViewModal({
   isOpen,
   close,
   item,
-  order,
   product,
   imagePath,
 }: {
   isOpen: boolean;
   close: () => void;
   item: OrderItem;
-  order: Order;
   product: Product;
   imagePath: string;
 }) {

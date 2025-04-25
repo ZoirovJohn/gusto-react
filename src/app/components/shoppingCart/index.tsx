@@ -24,7 +24,7 @@ function ShoppingCartSec() {
   const { orderBuilder, authMember, setOrderBuilder } = useGlobals();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
+  const [orderInquiry] = useState<OrderInquiry>({
     page: 1,
     limit: 5,
     orderStatus: OrderStatus.PAUSE,

@@ -3,20 +3,12 @@ import Swal from "sweetalert2";
 import { Messages } from "./config";
 
 export const sweetErrorHandling = async (err: any) => {
-  let message = Messages.error1;
-
-  if (err.response?.data?.message) {
-    message = err.response.data.message;
-  } else if (err.message) {
-    message = err.message;
-  }
-
+  const error = err.response?.data ?? err;
+  const message = error ?? Messages.error1;
   await Swal.fire({
     icon: "error",
-    title: "Oops!",
     text: message,
     showConfirmButton: false,
-    timer: 2500,
   });
 };
 

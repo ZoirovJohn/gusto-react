@@ -4,9 +4,10 @@ import { Messages, serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
 import {
   sweetErrorHandling,
-  sweetTopSuccessAlert,
+  sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { useBasket } from "../../hooks/BasketProvider";
+import { useGlobals } from "../../hooks/useGlobals";
 
 function FoodCard({
   product,
@@ -27,7 +28,7 @@ function FoodCard({
   const ingredients = productIngredient.split(",");
   // const offer = "20% Off";
   const imagePath = `${serverApi}/${productImages[0]}`;
-
+  const { authMember } = useGlobals();
   const navigate = useNavigate();
 
   const chooseDishHandler = (id: string) => {
@@ -36,8 +37,11 @@ function FoodCard({
 
   const handleOnAdd = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     try {
-      if (!true) {
+      console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+      
+      if (!authMember) {
         
+        await sweetErrorHandling(Messages.error2);
       } else {
         onAdd({
           _id: _id,
@@ -48,7 +52,7 @@ function FoodCard({
         });
         e.stopPropagation();
 
-        await sweetTopSuccessAlert("success", 700);
+        await sweetTopSmallSuccessAlert("success", 700);
       }
     } catch (err) {
       console.log(err);
