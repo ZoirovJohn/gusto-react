@@ -13,7 +13,20 @@ function Footer() {
             <div className="col-lg-4 col-md-12" data-aos="fade-right">
               <div className="footer-logo">
                 <div className="logo">
-                  <img src={logo} alt="logo" />
+                  <img
+                    src={logo}
+                    alt="logo"
+                    style={{
+                      height: "auto",
+                      objectFit: "contain",
+                      marginLeft: "-150px",
+                      marginRight: "-40px",
+                      fontSize: "16px",
+                      fontWeight: "400",
+                      lineHeight: "24px",
+                      width: "calc(100% + 0px)",
+                    }}
+                  />
                 </div>
               </div>
 

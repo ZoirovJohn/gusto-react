@@ -49,7 +49,17 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                     <div className="menu">
                       <ul>
                         <Link to="/">
-                          <img src={logo ? logo : logoImg} alt="logo" />
+                          <img
+                            src={logo ? logo : logoImg}
+                            alt="logo"
+                            style={{
+                              height: "48px",
+                              width: "180px",
+                              objectFit: "cover",
+                              objectPosition: "center",
+                              display: "block",
+                            }}
+                          />
                         </Link>
                         <NavButton title="Home" link="/" />
                         <NavButton title="Menu" link="/all-food" />
@@ -97,7 +107,17 @@ function Header({ className, logo }: { className?: string; logo?: string }) {
                       <ul>
                         <div className="logo">
                           <Link to="/">
-                            <img src={logo ? logo : logoImg} alt="logo" />
+                            <img
+                              src={logo ? logo : logoImg}
+                              alt="logo"
+                              style={{
+                                height: "48px",
+                                width: "180px",
+                                objectFit: "cover",
+                                objectPosition: "center",
+                                display: "block",
+                              }}
+                            />
                           </Link>
                         </div>
                         <NavButton title="Home" link="/" />

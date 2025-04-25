@@ -74,7 +74,18 @@ function SignIn() {
       <div className="sign-up-main">
         <div className="sign-up-logo">
           <Link to="/">
-            <img src={logoHeader} alt="logo" />
+            <img
+              src={logoHeader}
+              alt="logo"
+              style={{
+                height: "46px",
+                width: "auto",
+                maxWidth: "200px",
+                objectFit: "cover",
+                objectPosition: "center",
+                margin: "0",
+              }}
+            />
           </Link>
         </div>
         <div className="sign-up-text">

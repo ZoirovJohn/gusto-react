@@ -55,7 +55,7 @@ export default function SignUp() {
       const result = await member.signup(signupInput);
 
       setAuthMember(result);
-      navigate("/")
+      navigate("/");
     } catch (err) {
       console.log("err:", err);
       sweetErrorHandling(err).then();
@@ -83,7 +83,18 @@ export default function SignUp() {
       <div className="sign-up-main">
         <div className="sign-up-logo">
           <Link to="/">
-            <img src={logoHeader} alt="logo" />
+            <img
+              src={logoHeader}
+              alt="logo"
+              style={{
+                height: "46px", 
+                width: "auto", 
+                maxWidth: "200px",
+                objectFit: "cover", 
+                objectPosition: "center", 
+                margin: "0", 
+              }}
+            />
           </Link>
         </div>
         <div className="sign-up-text">
