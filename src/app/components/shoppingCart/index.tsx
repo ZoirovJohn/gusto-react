@@ -1,34 +1,155 @@
 import { cartInfo } from "../../../lib/data/shoppingCarts";
-import CartItem from "./cartItem";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import noimage from "../../../assets/icons/noimage-list.svg";
+import moment from "moment";
+import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
+import {
+  Order,
+  OrderInquiry,
+  OrderItem,
+  OrderUpdateInput,
+} from "../../../lib/types/orders";
+import { useGlobals } from "../../hooks/useGlobals";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import OrderService from "../../services/OrderService";
+import { useDispatch, useSelector } from "react-redux";
+import PausedOrders from "./PausedOrders";
+import ProcessOrders from "./ProcessOrders";
+import FinishedOrders from "./FinishedOrders";
+import {
+  retrieveFinishedOrders,
+  retrievePausedOrders,
+  retrieveProcessOrders,
+} from "./selector";
+import { Messages } from "../../../lib/config";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { T } from "../../../lib/types/common";
 
 function ShoppingCartSec() {
-  const [activeDescription, setActiveDescription] = useState("PAUSED ORDERS");
+  const [value, setValue] = useState("PAUSED ORDERS");
+  const { orderBuilder, authMember, setOrderBuilder } = useGlobals();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
+    page: 1,
+    limit: 5,
+    orderStatus: OrderStatus.PAUSE,
+  });
+
+  const pausedOrders: Order[] = useSelector(retrievePausedOrders);
+  const processOrders: Order[] = useSelector(retrieveProcessOrders);
+  const finishedOrders: Order[] = useSelector(retrieveFinishedOrders);
+
+  console.log("processOrders:", processOrders);
+
+  useEffect(() => {
+    const order = new OrderService();
+
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
+      .then((data) => dispatch(setPausedOrders(data)))
+      .catch((err) => console.log(err));
+
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
+      .then((data) => dispatch(setProcessOrders(data)))
+      .catch((err) => console.log(err));
+
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
+      .then((data) => dispatch(setFinishedOrders(data)))
+      .catch((err) => console.log(err));
+  }, [orderInquiry, orderBuilder]);
+
+  /** HANDLERS **/
+
+  const deleteOrderHandler = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      const orderId = e.currentTarget.getAttribute("data-id");
+      if (!orderId) throw new Error("Order ID not found");
+
+      const confirmation = window.confirm("Do you want to delete the order?");
+      if (confirmation) {
+        const order = new OrderService();
+        await order.updateOrder({
+          orderId,
+          orderStatus: OrderStatus.DELETE,
+        });
+        setOrderBuilder(new Date());
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err);
+    }
+  };
+
+  const processOrderHandler = async (
+    e: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+
+      const orderId = e.currentTarget.getAttribute("data-id");
+      if (!orderId) throw new Error("Order ID not found");
+
+      const confirmation = window.confirm("Do you want proceed with payment?");
+      if (confirmation) {
+        const order = new OrderService();
+        await order.updateOrder({
+          orderId,
+          orderStatus: OrderStatus.PROCESS,
+        });
+        setValue("PROCESS ORDERS");
+        setOrderBuilder(new Date());
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err);
+    }
+  };
+
+  const finishOrderHandler = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+
+      const orderId = e.currentTarget.getAttribute("data-id");
+      if (!orderId) throw new Error("Order ID not found");
+
+      const confirmation = window.confirm("Have you received your order?");
+      if (confirmation) {
+        const order = new OrderService();
+        await order.updateOrder({
+          orderId,
+          orderStatus: OrderStatus.FINISH,
+        });
+        setValue("3");
+        setOrderBuilder(new Date());
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err);
+    }
+  };
+
+  if (!authMember) navigate("/");
 
   return (
     <div className="food-details-item-box">
       <ul className="nav nav-pills" style={{ marginTop: "20px" }}>
         <li className="nav-item" role="presentation">
           <button
-            className={`nav-link  ${
-              activeDescription === "PAUSED ORDERS" ? "active" : ""
-            }`}
-            onClick={(e) =>
-              setActiveDescription((e.target as HTMLElement)?.innerText)
-            }
+            className={`nav-link  ${value === "PAUSED ORDERS" ? "active" : ""}`}
+            onClick={(e) => setValue((e.target as HTMLElement)?.innerText)}
           >
             PAUSED ORDERS
           </button>
         </li>
         <li className="nav-item" role="presentation">
           <button
-            className={`nav-link ${
-              activeDescription === "PROCESS ORDERS" ? "active" : ""
-            }`}
-            onClick={(e) =>
-              setActiveDescription((e.target as HTMLElement)?.innerText)
-            }
+            className={`nav-link ${value === "PROCESS ORDERS" ? "active" : ""}`}
+            onClick={(e) => setValue((e.target as HTMLElement)?.innerText)}
           >
             PROCESS ORDERS
           </button>
@@ -36,11 +157,9 @@ function ShoppingCartSec() {
         <li className="nav-item" role="presentation">
           <button
             className={`nav-link ${
-              activeDescription === "FINISHED ORDERS" ? "active" : ""
+              value === "FINISHED ORDERS" ? "active" : ""
             }`}
-            onClick={(e) =>
-              setActiveDescription((e.target as HTMLElement)?.innerText)
-            }
+            onClick={(e) => setValue((e.target as HTMLElement)?.innerText)}
           >
             FINISHED ORDERS
           </button>
@@ -50,12 +169,12 @@ function ShoppingCartSec() {
       <div className="tab-content">
         <div
           className={`tab-pane fade ${
-            activeDescription === "PAUSED ORDERS" ? "show active" : ""
+            value === "PAUSED ORDERS" ? "show active" : ""
           }`}
         >
           <section className="shopping-cart">
             <div className="container ">
-              {[1, 2, 3].map((cartItem) => (
+              {pausedOrders?.map((order: Order) => (
                 <div
                   className="row flex"
                   style={{
@@ -76,11 +195,12 @@ function ShoppingCartSec() {
                     <div className="tabel-main">
                       <table className="table">
                         <tbody>
-                          {cartInfo?.map((cartItem) => (
-                            <CartItem
-                              key={cartItem.id}
-                              {...cartItem}
-                              pageName="pausedOrders"
+                          {order?.orderItems?.map((item: OrderItem) => (
+                            <PausedOrders
+                              key={item._id}
+                              item={item}
+                              setValue={setValue}
+                              order={order}
                             />
                           ))}
                         </tbody>
@@ -99,18 +219,35 @@ function ShoppingCartSec() {
                       }}
                     >
                       <h5 style={{ fontWeight: "600", marginTop: "5px" }}>
-                        Product Price $25 + Delivery Cost $5 = Total $30
+                        Product Price ${order.orderTotal - order.orderDelivery}{" "}
+                        + Delivery Cost ${order.orderDelivery} = Total $
+                        {order.orderTotal}
                       </h5>
-                      <Link to="" className="main-btn-six">
+                      <Link
+                        to=""
+                        className="main-btn-six"
+                        data-id={order._id}
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          deleteOrderHandler(e);
+                        }}
+                      >
                         Cancel
                       </Link>
                       <Link
                         to=""
+                        data-id={order._id}
                         className="main-btn-six"
                         style={{
                           backgroundColor: "green",
                           color: "#D3D3D3",
                           border: "1px solid green",
+                        }}
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          processOrderHandler(e);
                         }}
                       >
                         Process
@@ -119,17 +256,32 @@ function ShoppingCartSec() {
                   </div>
                 </div>
               ))}
+              {(!pausedOrders || pausedOrders.length === 0) && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={noimage}
+                    alt="No orders"
+                    style={{ width: 300, height: 300 }}
+                  />
+                </div>
+              )}
             </div>
           </section>
         </div>
         <div
           className={`tab-pane fade ${
-            activeDescription === "PROCESS ORDERS" ? "show active" : ""
+            value === "PROCESS ORDERS" ? "show active" : ""
           }`}
         >
           <section className="shopping-cart">
             <div className="container ">
-              {[1, 2, 3].map((cartItem) => (
+              {processOrders?.map((order) => (
                 <div
                   className="row flex"
                   style={{
@@ -150,11 +302,12 @@ function ShoppingCartSec() {
                     <div className="tabel-main">
                       <table className="table">
                         <tbody>
-                          {cartInfo?.map((cartItem) => (
-                            <CartItem
-                              key={cartItem.id}
-                              {...cartItem}
-                              pageName="processOrders"
+                          {order?.orderItems?.map((item: OrderItem) => (
+                            <ProcessOrders
+                              key={item._id}
+                              item={item}
+                              setValue={setValue}
+                              order={order}
                             />
                           ))}
                         </tbody>
@@ -175,13 +328,25 @@ function ShoppingCartSec() {
                       <h5 style={{ fontWeight: "600", marginTop: "5px" }}>
                         Product Price $25 + Delivery Cost $5 = Total $30
                       </h5>
+                      <p
+                        className="data-compl"
+                        style={{ fontWeight: "600", marginTop: "5px" }}
+                      >
+                        {moment().format("YY-MM-DD HH:mm")}
+                      </p>
                       <Link
                         to=""
+                        data-id={order._id}
                         className="main-btn-six"
                         style={{
                           backgroundColor: "#4CAF50",
                           color: "#D3D3D3",
                           border: "1px solid #4CAF50",
+                        }}
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          finishOrderHandler(e);
                         }}
                       >
                         Verify
@@ -190,17 +355,32 @@ function ShoppingCartSec() {
                   </div>
                 </div>
               ))}
+              {(!processOrders || processOrders.length === 0) && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={noimage}
+                    alt="No orders"
+                    style={{ width: 300, height: 300 }}
+                  />
+                </div>
+              )}
             </div>
           </section>
         </div>
         <div
           className={`tab-pane fade ${
-            activeDescription === "FINISHED ORDERS" ? "show active" : ""
+            value === "FINISHED ORDERS" ? "show active" : ""
           }`}
         >
           <section className="shopping-cart">
             <div className="container ">
-              {[1, 2, 3].map((cartItem) => (
+              {finishedOrders.map((order) => (
                 <div
                   className="row flex"
                   style={{
@@ -221,11 +401,12 @@ function ShoppingCartSec() {
                     <div className="tabel-main">
                       <table className="table">
                         <tbody>
-                          {cartInfo?.map((cartItem) => (
-                            <CartItem
-                              key={cartItem.id}
-                              {...cartItem}
-                              pageName="finishedOrders"
+                          {order?.orderItems?.map((item: OrderItem) => (
+                            <FinishedOrders
+                              key={item._id}
+                              item={item}
+                              setValue={setValue}
+                              order={order}
                             />
                           ))}
                         </tbody>
@@ -250,6 +431,21 @@ function ShoppingCartSec() {
                   </div>
                 </div>
               ))}
+              {(!finishedOrders || finishedOrders.length === 0) && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={noimage}
+                    alt="No orders"
+                    style={{ width: 300, height: 300 }}
+                  />
+                </div>
+              )}
             </div>
           </section>
         </div>

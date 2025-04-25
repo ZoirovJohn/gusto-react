@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
+import useBasket from "../../hooks/useBasket";
 
 function FoodCard({
   product,
@@ -10,7 +11,9 @@ function FoodCard({
   product: Product;
   className?: string;
 }) {
+  const { onAdd } = useBasket();
   const {
+    _id,
     productName,
     productImages,
     productViews,
@@ -18,7 +21,7 @@ function FoodCard({
     productIngredient,
   } = product;
   const ingredients = productIngredient.split(",");
-  const offer = "20% Off";
+  // const offer = "20% Off";
   const imagePath = `${serverApi}/${productImages[0]}`;
 
   const navigate = useNavigate();
@@ -116,7 +119,21 @@ function FoodCard({
               </div>
             ))}
             <div className="featured-item-btn">
-              <Link to="/shopping-cart" className="main-btn-three">
+              <Link
+                to=""
+                className="main-btn-three"
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                  onAdd({
+                    _id: _id,
+                    quantity: 1,
+                    name: productName,
+                    price: productPrice,
+                    image: productImages[0],
+                  });
+                  // Optionally stop navigation if needed
+                  e.stopPropagation();
+                }}
+              >
                 <span>
                   <svg
                     width="24"

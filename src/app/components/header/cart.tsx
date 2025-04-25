@@ -1,10 +1,45 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useBasket from "../../hooks/useBasket";
+import { CartItemType } from "../../../lib/types/search";
+import OrderService from "../../services/OrderService";
+import { Messages } from "../../../lib/config";
+import { useGlobals } from "../../hooks/useGlobals";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import CartItem from "./cartItem";
-import cartImg from "../../../assets/images/small/my-cart.png";
 
 function HeaderCart() {
   const [isOpen, setIsOpen] = useState(false);
+  const { cartItems, onDeleteAll } = useBasket();
+  console.log("cardItems:", cartItems);
+
+  const { authMember, setOrderBuilder } = useGlobals();
+  const navigate = useNavigate();
+  const itemsPrice = cartItems.reduce(
+    (a: number, c: CartItemType) => a + c.quantity * c.price,
+    0
+  );
+  const shippingCost: number = itemsPrice < 100 ? 5 : 0;
+  const totalPrice = (itemsPrice + shippingCost).toFixed(1);
+
+  const proceedOrderHandler = async () => {
+    try {
+      // handleClose();
+      if (!authMember) throw new Error(Messages.error2);
+
+      const order = new OrderService();
+      await order.createOrder(cartItems);
+
+      onDeleteAll();
+
+      setOrderBuilder(new Date());
+      navigate("/shopping-cart");
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
   return (
     <div className="love cart">
       <div className="click" onClick={() => setIsOpen((prev) => !prev)}></div>
@@ -82,64 +117,75 @@ function HeaderCart() {
           </div>
         </div>
 
-        <div className="cart-dropdown-btn-two">
-          <Link to="" className=" cart-btn-two ">
-            Clear basket
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M3 6h18M10 6V4a2 2 0 1 1 4 0v2M5 6h14l1 14H4L5 6z" />
-              </svg>
-            </span>
-          </Link>
-        </div>
-        <CartItem
-          img={cartImg}
-          title="Baked Chicken Wings & Legs"
-          price="30.00"
-        />
-        <CartItem
-          img={cartImg}
-          title="Baked Chicken Wings & Legs"
-          price="30.00"
-        />
-        <CartItem
-          img={cartImg}
-          title="Baked Chicken Wings & Legs"
-          price="30.00"
-        />
-        <CartItem
-          img={cartImg}
-          title="Baked Chicken Wings & Legs"
-          price="30.00"
-        />
-        <div className="cart-dropdown-sub-total">
-          <div className="cart-dropdown-sub-total-item">
-            <div className="text">
-              <h3>Subtotal</h3>
-            </div>
-            <div className="text">
-              <h3>
-                <span>10 + 20 = </span><a href="">$30</a>
-              </h3>
-            </div>
-          </div>
-
-          <div className="cart-dropdown-sub-total-btn">
-            <Link to="/shopping-cart" className="main-btn-four">
-              ORDER
+        {cartItems.length !== 0 ? (
+          <div className="cart-dropdown-btn-two">
+            <Link
+              to=""
+              className=" cart-btn-two "
+              onClick={() => onDeleteAll()}
+            >
+              Clear basket
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 6h18M10 6V4a2 2 0 1 1 4 0v2M5 6h14l1 14H4L5 6z" />
+                </svg>
+              </span>
             </Link>
           </div>
-        </div>
+        ) : (
+          <div className="cart-dropdown-btn-two">
+            <Link to="" className=" cart-btn-two ">
+              Basket is empty!
+            </Link>
+          </div>
+        )}
+
+        {cartItems.map((item: CartItemType) => {
+          return <CartItem item={item} />;
+        })}
+
+        {cartItems.length !== 0 ? (
+          <div className="cart-dropdown-sub-total">
+            <div className="cart-dropdown-sub-total-item">
+              <div className="text">
+                <h3>Subtotal:</h3>
+              </div>
+              <div className="text">
+                <h3>
+                  <span>
+                    {itemsPrice} + {shippingCost} ={" "}
+                  </span>
+                  <a href="">${totalPrice}</a>
+                </h3>
+              </div>
+            </div>
+
+            <div className="cart-dropdown-sub-total-btn">
+              <Link
+                to=""
+                className="main-btn-four"
+                onClick={(e) => {
+                  e.preventDefault();
+                  proceedOrderHandler();
+                }}
+              >
+                ORDER
+              </Link>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

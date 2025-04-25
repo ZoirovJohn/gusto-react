@@ -1,26 +1,40 @@
-function CartItem({
-  img,
-  title,
-  price,
-}: {
-  img: string;
-  title: string;
-  price: string;
-}) {
+import { serverApi } from "../../../lib/config";
+import { CartItemType } from "../../../lib/types/search";
+import useBasket from "../../hooks/useBasket";
+
+function CartItem({ item }: { item: CartItemType }) {
+  const imagePath = `${serverApi}/${item.image}`;
+
+  const { onAdd, onRemove, onDelete } = useBasket();
   return (
     <div className="cart-dropdown-item-box">
       <div className="cart-dropdown-item">
         <div className="cart-dropdown-item-img">
-          <img src={img} alt="img" />
+          <img
+            src={imagePath}
+            alt="img"
+            style={{
+              width: "70px",
+              height: "70px",
+              objectFit: "cover",
+              borderRadius: "20%",
+            }}
+          />
         </div>
         <div className="cart-dropdown-item-text">
-          <h3>{title}</h3>
-          <p>${price}</p>
+          <h3>{item.name}</h3>
+          <p>${item.price}</p>
         </div>
       </div>
       <div className="cart-dropdown-inner">
         <div className="cart-dropdown-inner-btn">
-          <a href="">
+          <a
+            href=""
+            onClick={(e) => {
+              e.preventDefault();
+              onRemove(item);
+            }}
+          >
             <span>
               <svg
                 width="18"
@@ -41,15 +55,16 @@ function CartItem({
           </a>
         </div>
         <div className="cart-dropdown-inner-btn cart-dropdown-inner-btn-two ">
-          <input
-            type="email"
-            className="form-control"
-            id="exampleFormControlInput2"
-            defaultValue="100"
-          />
+          <h5 style={{ margin: "4px" }}> {item.quantity} </h5>
         </div>
         <div className="cart-dropdown-inner-btn">
-          <a href="">
+          <a
+            href=""
+            onClick={(e) => {
+              e.preventDefault();
+              onAdd(item);
+            }}
+          >
             <span>
               <svg
                 width="18"
@@ -70,7 +85,13 @@ function CartItem({
           </a>
         </div>
         <div className="cart-dropdown-inner-btn" style={{ marginLeft: "10px" }}>
-          <a href="">
+          <a
+            href=""
+            onClick={(e) => {
+              e.preventDefault();
+              onDelete(item);
+            }}
+          >
             <span>
               <svg
                 width="18"
