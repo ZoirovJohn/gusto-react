@@ -5,6 +5,7 @@ import App from "./app/App.tsx";
 import ContextProvider from "./app/context/ContextProvider.tsx";
 import { BasketProvider } from "./app/hooks/BasketProvider.tsx";
 import { store } from "./app/store.ts";
+import { SocketProvider } from "./app/context/SocketContext.tsx";
 import "./assets/css/bootstrap.min.css";
 import "./assets/css/style.css";
 import "./assets/css/responsive.css";
@@ -14,9 +15,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <ContextProvider>
-        <BasketProvider>
-          <App />
-        </BasketProvider>
+        <SocketProvider>
+          <BasketProvider>
+            <App />
+          </BasketProvider>
+        </SocketProvider>
       </ContextProvider>
     </Provider>
   </React.StrictMode>
