@@ -1,31 +1,50 @@
 import { useState } from "react";
 import ViewModal from "./viewModal";
+import { ProductCollection, ProductStatus } from "../../../lib/enums/product.enum";
 
 function CartItem({
   image,
   title,
   size,
-  addon,
-  addonPrice,
   unitPrice,
-  totalPrice,
-  qty,
   pageName,
 }: {
   image: string;
   title: string;
   size: string;
-  addon: string;
-  addonPrice: number;
   unitPrice: number;
-  totalPrice: number;
-  qty: number;
   pageName: string;
 }) {
   const [viewProduct, setViewProduct] = useState(false);
   return (
     <>
-      <ViewModal isOpen={viewProduct} close={() => setViewProduct(false)} />
+      <ViewModal
+        isOpen={viewProduct}
+        close={() => setViewProduct(false)}
+        item={{
+          _id: "", // Provide actual values as needed
+          itemQuantity: 1,
+          itemPrice: unitPrice,
+          orderId: "",
+          productId: "",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }}
+        product={{
+          _id: "", // Provide actual product ID as needed
+          productStatus: ProductStatus.PROCESS,
+          productCollection: ProductCollection.BURGER, // Replace DEFAULT with an actual value from your ProductCollection enum/type
+          productName: "",
+          productPrice: 0,
+          productImages: [],
+          productIngredient: "", // Provide actual ingredient as needed
+          productLeftCount: 0, // Provide actual count as needed
+          productVolume: 0, // Provide actual volume as needed
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }}
+        imagePath={image}
+      />
       <tr>
         <td style={{ border: "none" }}>
           <div className="tabel-img">

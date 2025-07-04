@@ -1,7 +1,12 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { Order, OrderInquiry, OrderItemInput, OrderUpdateInput } from "../../lib/types/orders";
-import { CartItem } from "../../lib/types/search";
+import {
+  Order,
+  OrderInquiry,
+  OrderItemInput,
+  OrderUpdateInput,
+} from "../../lib/types/orders";
+import { CartItemType } from "../../lib/types/search";
 
 class OrderService {
   private readonly path: string;
@@ -10,15 +15,17 @@ class OrderService {
     this.path = serverApi;
   }
 
-  public async createOrder(input: CartItem[]): Promise<Order> {
+  public async createOrder(input: CartItemType[]): Promise<Order> {
     try {
-      const orderItems: OrderItemInput[] = input.map((cartItem: CartItem) => {
-        return {
-          itemQuantity: cartItem.quantity,
-          itemPrice: cartItem.price,
-          productId: cartItem._id,
-        };
-      });
+      const orderItems: OrderItemInput[] = input.map(
+        (cartItem: CartItemType) => {
+          return {
+            itemQuantity: cartItem.quantity,
+            itemPrice: cartItem.price,
+            productId: cartItem._id,
+          };
+        }
+      );
 
       const url = `${this.path}/order/create`;
       const result = await axios.post(url, orderItems, {

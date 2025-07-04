@@ -1,6 +1,4 @@
 import userImg from "../../../assets/images/small/dashboard-menu-profile-img.png";
-import LogoutCom from "./logout";
-import SidebarBtn from "./sidebarBtn";
 
 function Sidebar() {
   return (

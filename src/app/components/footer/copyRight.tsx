@@ -6,7 +6,7 @@ function CopyRight() {
           <div className="col-lg-12">
             <div className="copyright-text">
               <h4>
-                ©2023 <span>Gusto</span>. All rights reserved
+                ©2023 <span>Gusto</span> by Thomas. All rights reserved
               </h4>
             </div>
           </div>

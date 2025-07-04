@@ -24,7 +24,6 @@ function PausedOrders({
         isOpen={viewProduct}
         close={() => setViewProduct(false)}
         item={item}
-        order={order}
         product={product}
         imagePath={imagePath}
       />

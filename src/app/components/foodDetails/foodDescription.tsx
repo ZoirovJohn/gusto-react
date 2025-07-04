@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import CommentForm from "./commentForm";
 
 import VideoPlayer from "./videoPlayer";
-import { cartInfo } from "../../../lib/data/shoppingCarts";
-import CartItem from "../header/cartItem";
 
 function FoodDescription() {
   const [activeDescription, setActiveDescription] = useState("Food Details");

@@ -7,11 +7,11 @@
     "dev": "vite",
     "start": "vite",
     "build": "tsc && vite build",
+    "start:prod": "serve -s dist -l 80",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.8.4",
     "@mui/joy": "^5.0.0-beta.51",
     "@mui/lab": "^5.0.0-alpha.86",
@@ -44,6 +44,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "picocolors": "^1.1.1",
+    "serve": "^14.2.4",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import { LoginInput, MemberInput } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
+import { Backdrop, Fab, Fade, Modal, Stack, TextField } from "@mui/material";
+import LoginIcon from "@mui/icons-material/Login";
 
 interface AuthenticationModalProps {
   signupOpen: boolean;
@@ -97,7 +99,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        className={classes.modal}
+        sx={classes.modal}
         open={signupOpen}
         onClose={handleSignupClose}
         closeAfterTransition
@@ -108,11 +110,10 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       >
         <Fade in={signupOpen}>
           <Stack
-            className={classes.paper}
+            sx={{ ...classes.paper, width: "800px" }}
             direction={"row"}
-            sx={{ width: "800px" }}
           >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
+            <img src={"/img/auth.webp"} alt="camera" style={{ width: "200px", borderRadius: "8px" }} />
             <Stack sx={{ marginLeft: "69px", alignItems: "center" }}>
               <h2>Signup Form</h2>
               <TextField
@@ -153,7 +154,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        className={classes.modal}
+        sx={classes.modal}
         open={loginOpen}
         onClose={handleLoginClose}
         closeAfterTransition
@@ -163,48 +164,67 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
         }}
       >
         <Fade in={loginOpen}>
-          <Stack
-            className={classes.paper}
-            direction={"row"}
-            sx={{ width: "700px" }}
-          >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
+          <>
             <Stack
-              sx={{
-                marginLeft: "65px",
-                marginTop: "25px",
-                alignItems: "center",
-              }}
+              sx={{ ...classes.paper, width: "700px" }}
+              direction={"row"}
             >
-              <h2>Login Form</h2>
-              <TextField
-                id="outlined-basic"
-                label="username"
-                variant="outlined"
-                sx={{ my: "10px" }}
-                onChange={handleUsername}
-              />
-              <TextField
-                id={"outlined-basic"}
-                label={"password"}
-                variant={"outlined"}
-                type={"password"}
-                onChange={handlePassword}
-                onKeyDown={handlePasswordKeyDown}
-              />
-              <Fab
-                sx={{ marginTop: "27px", width: "120px" }}
-                variant={"extended"}
-                color={"primary"}
-                onClick={handleLoginRequest}
+              <img src={"/img/auth.webp"} alt="camera" style={{ width: "200px", borderRadius: "8px" }} />
+              <Stack
+                sx={{
+                  marginLeft: "65px",
+                  marginTop: "25px",
+                  alignItems: "center",
+                }}
               >
-                <LoginIcon sx={{ mr: 1 }} />
-                Login
-              </Fab>
+                <h2>Login Form</h2>
+                <TextField
+                  id="outlined-basic"
+                  label="username"
+                  variant="outlined"
+                  sx={{ my: "10px" }}
+                  onChange={handleUsername}
+                />
+                <TextField
+                  id={"outlined-basic"}
+                  label={"password"}
+                  variant={"outlined"}
+                  type={"password"}
+                  onChange={handlePassword}
+                  onKeyDown={handlePasswordKeyDown}
+                />
+                <Fab
+                  sx={{ marginTop: "27px", width: "120px" }}
+                  variant={"extended"}
+                  color={"primary"}
+                  onClick={handleLoginRequest}
+                >
+                  <LoginIcon sx={{ mr: 1 }} />
+                  Login
+                </Fab>
+              </Stack>
             </Stack>
-          </Stack>
+          </>
         </Fade>
       </Modal>
     </div>
   );
+}
+function useStyles() {
+  return {
+    modal: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    paper: {
+      backgroundColor: "#fff",
+      border: "2px solid #000",
+      boxShadow: 24,
+      padding: "32px 24px",
+      borderRadius: "8px",
+      display: "flex",
+      alignItems: "center",
+    },
+  };
 }
