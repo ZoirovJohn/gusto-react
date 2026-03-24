@@ -11,8 +11,6 @@ import { useBasket } from "../../hooks/BasketProvider";
 function HeaderCart() {
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems, onDeleteAll } = useBasket();
-  console.log("cardItems:", cartItems);
-
   const { authMember, setOrderBuilder } = useGlobals();
   const navigate = useNavigate();
   const itemsPrice = cartItems.reduce(

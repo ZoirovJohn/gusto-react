@@ -144,7 +144,7 @@ function Footer() {
                           <Link to="">📧 Email: zoirovtokhirjon@gmail.com</Link>
                         </li>
                         <li>
-                          <Link to="">📞 Phone: +82 (10) 8055-0867</Link>
+                          <Link to="">📞 Phone: +998 97 521 31 30</Link>
                         </li>
                         <li>
                           <Link to="">
