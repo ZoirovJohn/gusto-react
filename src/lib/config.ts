@@ -1,4 +1,29 @@
-export const serverApi: string = import.meta.env.VITE_API_URL
+function stripTrailingSlash(url: string) {
+  return url.endsWith("/") ? url.slice(0, -1) : url;
+}
+
+function deriveApiBaseUrl() {
+  if (typeof window === "undefined") return "http://127.0.0.1:3007";
+
+  const { protocol, hostname } = window.location;
+  const isHttps = protocol === "https:";
+  const httpProto = isHttps ? "https:" : "http:";
+
+  const host = hostname.startsWith("www.") ? hostname.slice(4) : hostname;
+
+  if (host === "127.0.0.1" || host === "localhost") {
+    return "http://127.0.0.1:3007";
+  }
+
+  if (host.startsWith("api.")) {
+    return `${httpProto}//${host}`;
+  }
+
+  return `${httpProto}//api.${host}`;
+}
+
+const envApiUrl = import.meta.env.VITE_API_URL as string | undefined;
+export const serverApi: string = stripTrailingSlash(envApiUrl || deriveApiBaseUrl());
 
 export const Messages = {
   error1: "Something went wrong!",
