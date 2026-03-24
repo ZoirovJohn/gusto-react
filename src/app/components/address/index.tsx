@@ -58,8 +58,8 @@ function AddressCom() {
               </a>
               <br />
               Phone
-              <a href="tel:+17077970462">
-                <b>+1 707 797 0462</b>
+              <a href="tel:+998975213130">
+                <b>+998 97 521 31 30</b>
               </a>
               <br />
               Country :
@@ -146,8 +146,8 @@ function AddressCom() {
               </a>
               <br />
               Phone
-              <a href="tel:+18040005262">
-                <b> +1 804 000 5262</b>
+              <a href="tel:+998975213130">
+                <b> +998 97 521 31 30</b>
               </a>
               <br />
               Country :

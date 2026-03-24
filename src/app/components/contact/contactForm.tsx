@@ -39,7 +39,7 @@ function ContactForm() {
                 type="text"
                 className="form-control"
                 id="exampleFormControlInput5"
-                placeholder="+49 123456789"
+                placeholder="+998 97 521 31 30"
               />
             </div>
           </div>

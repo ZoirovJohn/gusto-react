@@ -36,7 +36,7 @@ function ContactInfo() {
                 <div className="text">
                   <h5>Contact Info</h5>
                   <p>Open a chat or give us call at</p>
-                  <a href="tel:+17077970462">+1 707 797 0462</a>
+                  <a href="tel:+998975213130">+998 97 521 31 30</a>
                 </div>
               </div>
             </div>
