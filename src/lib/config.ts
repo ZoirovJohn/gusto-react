@@ -23,7 +23,16 @@ function deriveApiBaseUrl() {
 }
 
 const envApiUrl = import.meta.env.VITE_API_URL as string | undefined;
-export const serverApi: string = stripTrailingSlash(envApiUrl || deriveApiBaseUrl());
+const normalizedEnvApiUrl = (() => {
+  if (!envApiUrl) return undefined;
+  const trimmed = envApiUrl.trim();
+  if (!trimmed) return undefined;
+  if (trimmed.toLowerCase() === "undefined") return undefined;
+  if (trimmed.toLowerCase() === "null") return undefined;
+  return trimmed;
+})();
+
+export const serverApi: string = stripTrailingSlash(normalizedEnvApiUrl || deriveApiBaseUrl());
 
 export const Messages = {
   error1: "Something went wrong!",
